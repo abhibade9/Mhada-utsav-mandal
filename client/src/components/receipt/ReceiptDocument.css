@@ -1,0 +1,405 @@
+/* Scoped Styles for Official Receipt Voucher */
+
+.receipt-document-wrapper {
+  box-sizing: border-box;
+  font-family: 'Mukta', sans-serif;
+  color: #2D060B;
+  background-color: #FFFFFF;
+}
+
+.receipt-voucher-card {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border: 2.5px solid #5B0914;
+  border-radius: 10px;
+  padding: 8px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(91, 9, 20, 0.08);
+}
+
+.receipt-inner-border {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid #D4AF37;
+  border-radius: 8px;
+  padding: 18px 22px;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Society Header */
+.receipt-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 2px solid #5B0914;
+  padding-bottom: 12px;
+}
+
+.receipt-logo-box {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border: 1px solid #D4AF37;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  background-color: #FFFFFF;
+}
+
+.receipt-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.receipt-header-info {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.receipt-shree-ganesh {
+  font-size: 11px;
+  font-weight: 800;
+  color: #B45309;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.receipt-mandal-name-mr {
+  font-family: 'Noto Serif Devanagari', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #38040B;
+  line-height: 1.2;
+  margin: 2px 0 0 0;
+}
+
+.receipt-mandal-name-en {
+  font-family: 'Noto Serif Devanagari', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #780C1E;
+  letter-spacing: 0.04em;
+  margin: 1px 0 0 0;
+}
+
+.receipt-address {
+  font-size: 11px;
+  color: #57534E;
+  margin: 2px 0 0 0;
+  line-height: 1.3;
+}
+
+.receipt-reg-no {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #92400E;
+  margin: 2px 0 0 0;
+}
+
+/* Badge Header */
+.receipt-badge-center {
+  text-align: center;
+  margin: 2px 0;
+}
+
+.receipt-badge-pill {
+  display: inline-block;
+  background: linear-gradient(135deg, #4A050E 0%, #5B0914 50%, #780C1E 100%);
+  color: #FDF4D9;
+  font-family: 'Noto Serif Devanagari', serif;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 4px 24px;
+  border-radius: 9999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(91, 9, 20, 0.15);
+  border: 1px solid #D4AF37;
+}
+
+/* Metadata Row */
+.receipt-meta-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 14px;
+  background-color: #FEF9EE;
+  border: 1px solid #E4C875;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #38040B;
+}
+
+.receipt-meta-value {
+  font-family: monospace;
+  font-weight: 900;
+  color: #780C1E;
+}
+
+/* Resident Info Fields */
+.receipt-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12.5px;
+  border-bottom: 1px solid #E7E5E4;
+  padding-bottom: 12px;
+}
+
+.receipt-field-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.receipt-field-label {
+  font-weight: 700;
+  color: #57534E;
+  flex-shrink: 0;
+}
+
+.receipt-field-value-underline {
+  border-bottom: 1px dotted #A8A29E;
+  flex-grow: 1;
+  font-weight: 800;
+  color: #2D060B;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.receipt-field-resident-name {
+  font-family: 'Noto Serif Devanagari', serif;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: #38040B;
+}
+
+.receipt-grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Amount Box */
+.receipt-amount-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #FFFDF8 0%, #FEF8ED 50%, #FDF4E3 100%);
+  border: 2px solid #D4AF37;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.receipt-amount-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #57534E;
+  display: block;
+}
+
+.receipt-amount-number {
+  font-size: 22px;
+  font-weight: 900;
+  color: #38040B;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.receipt-amount-words-box {
+  text-align: right;
+  max-width: 58%;
+}
+
+.receipt-amount-words-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #78716C;
+  display: block;
+}
+
+.receipt-amount-words-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: #780C1E;
+  font-style: italic;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+/* Description / Note */
+.receipt-description-box {
+  padding: 8px 12px;
+  background-color: #FAFAF9;
+  border: 1px solid #E7E5E4;
+  border-radius: 6px;
+  font-size: 11.5px;
+  color: #44403C;
+  line-height: 1.45;
+  font-style: italic;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Footer Section */
+.receipt-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  border-top: 2px solid #5B0914;
+  padding-top: 10px;
+}
+
+.receipt-footer-notes {
+  font-size: 10px;
+  color: #78716C;
+  line-height: 1.35;
+  max-width: 320px;
+}
+
+.receipt-footer-notes p {
+  margin: 1px 0;
+}
+
+.receipt-signature-box {
+  text-align: center;
+  min-width: 150px;
+  flex-shrink: 0;
+}
+
+.receipt-signature-img-area {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.receipt-signature-img {
+  max-height: 46px;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.receipt-signature-placeholder {
+  font-size: 10px;
+  color: #A8A29E;
+  font-style: italic;
+}
+
+.receipt-signature-line {
+  border-top: 1.5px solid #5B0914;
+  padding-top: 3px;
+  margin-top: 2px;
+}
+
+.receipt-signatory-title-mr {
+  font-size: 11px;
+  font-weight: 800;
+  color: #5B0914;
+  display: block;
+  line-height: 1.2;
+}
+
+.receipt-signatory-title-en {
+  font-size: 9px;
+  font-weight: 700;
+  color: #78716C;
+  display: block;
+}
+
+/* ============================================================ */
+/* A4 PORTRAIT PRINT SPECIFICATIONS                             */
+/* ============================================================ */
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  /* Hide the web application root and surrounding modals */
+  body.receipt-print-active #root,
+  body:has(#receipt-print-portal) #root {
+    display: none !important;
+  }
+
+  body.receipt-print-active,
+  body:has(#receipt-print-portal) {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Dedicated Print Portal Container */
+  #receipt-print-portal {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 10mm 12mm !important;
+    box-sizing: border-box !important;
+    background: #FFFFFF !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  #receipt-print-portal .receipt-voucher-card {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 277mm !important;
+    box-sizing: border-box !important;
+    border: 2.5px solid #5B0914 !important;
+    border-radius: 8px !important;
+    padding: 3mm !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+  }
+
+  #receipt-print-portal .receipt-inner-border {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    border: 1.5px solid #D4AF37 !important;
+    border-radius: 6px !important;
+    padding: 5mm 6mm !important;
+    background: #FFFFFF !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+}
+
+@media screen {
+  #receipt-print-portal {
+    display: none !important;
+  }
+}

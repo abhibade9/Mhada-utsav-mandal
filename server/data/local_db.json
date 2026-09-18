@@ -1,0 +1,1193 @@
+{
+  "users": [
+    {
+      "_id": "admin_society_mhada",
+      "username": "admin",
+      "email": "mhadatowersutsavmandal@gmail.com",
+      "passwordHash": "$2a$10$28kihiLQHSb5C.ILlPSOY.crVaBsg06xpSLNcnnNSg8t9mnLnoJ8m",
+      "name": "म्हाडा उत्सव समिती अध्यक्ष (Admin)",
+      "role": "admin",
+      "isActive": true,
+      "failedLoginAttempts": 0,
+      "lockUntil": null,
+      "resetTokenHash": null,
+      "resetTokenExpiresAt": null,
+      "passwordChangedAt": "2026-09-17T13:07:23.706Z",
+      "createdAt": "2026-09-14T14:31:23.330Z",
+      "updatedAt": "2026-09-17T13:37:21.749Z"
+    }
+  ],
+  "config": {
+    "mandalNameMr": "म्हाडा टॉवर्स उत्सव मंडळ",
+    "mandalNameEn": "MHADA Towers Utsav Mandal",
+    "addressMr": "पिंपरी वाघेरे, पिंपरी चिंचवड, पुणे - ४११०१७",
+    "regNo": "F ६३३६८- पुणे",
+    "festivalYear": "२०२६",
+    "festivalStatus": "उत्सव सुरू आहे (Festival Live)",
+    "marqueeText": "",
+    "marqueeActive": true,
+    "scrollerMessages": [
+      {
+        "id": "msg_1",
+        "text": "7:30 PM. Kindly arrive 10 minutes earlier.",
+        "textMr": "संध्या. ७:३० वाजता. कृपया १० मिनिटे आधी यावे.",
+        "textEn": "7:30 PM. Kindly arrive 10 minutes earlier.",
+        "isActive": true,
+        "order": 1,
+        "startDate": "",
+        "endDate": "",
+        "createdAt": "2026-09-16T11:07:25.522Z"
+      },
+      {
+        "id": "msg_3",
+        "text": "Daily Maha Aarti: 08:30 AM & 08:00 PM",
+        "textMr": "दैनिक महाआरती: सकाळी ८:३० व रात्री ८:०० वाजता",
+        "textEn": "Daily Maha Aarti: 08:30 AM & 08:00 PM",
+        "isActive": true,
+        "order": 2,
+        "startDate": "",
+        "endDate": "",
+        "createdAt": "2026-09-16T11:07:25.522Z"
+      },
+      {
+        "id": "msg_4",
+        "text": "Shree Ganeshotsav 2026 • Digital Information Center",
+        "textMr": "श्री गणेशोत्सव २०२६ • डिजिटल माहिती केंद्र",
+        "textEn": "Shree Ganeshotsav 2026 • Digital Information Center",
+        "isActive": true,
+        "order": 3,
+        "startDate": "",
+        "endDate": "",
+        "createdAt": "2026-09-16T11:07:25.523Z"
+      }
+    ],
+    "participatingWings": [
+      "G",
+      "H",
+      "J",
+      "K",
+      "I "
+    ],
+    "whatsAppCommunityLink": "https://chat.whatsapp.com/sample-mhada-ganpati-community",
+    "emergencyHelpline": "45654",
+    "email": "mhadatowersutsavmandal@gmail.com",
+    "tabs": {
+      "arrival": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "श्रींचे आगमन",
+        "labelEn": "Ganpati Arrival",
+        "order": 1
+      },
+      "aarti": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "दैनिक महाआरती",
+        "labelEn": "Aarti Timings",
+        "order": 2
+      },
+      "schedule": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "१० दिवसांचे वेळापत्रक",
+        "labelEn": "10-Day Schedule",
+        "order": 3
+      },
+      "cultural": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "आगामी कार्यक्रम",
+        "labelEn": "Upcoming Events",
+        "order": 4
+      },
+      "gallery": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "छायाचित्रे",
+        "labelEn": "Photo Gallery",
+        "order": 5
+      },
+      "prasad": {
+        "enabled": false,
+        "approved": false,
+        "labelMr": "महाप्रसाद",
+        "labelEn": "Maha Prasad",
+        "order": 6
+      },
+      "visarjan": {
+        "enabled": false,
+        "approved": false,
+        "labelMr": "विसर्जन सोहळा",
+        "labelEn": "Visarjan Timings",
+        "order": 7
+      },
+      "announcements": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "महत्वाच्या सूचना",
+        "labelEn": "Announcements",
+        "order": 8
+      },
+      "ownersNotice": {
+        "enabled": false,
+        "approved": false,
+        "labelMr": "वर्गणी व सभा अपडेट",
+        "labelEn": "Owners & Mandal Info",
+        "order": 9
+      },
+      "rules": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "मंडळ नियमावली",
+        "labelEn": "Society Rules",
+        "order": 10
+      },
+      "whatsapp": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "व्हॉट्सॲप कम्युनिटी",
+        "labelEn": "WhatsApp Group QR",
+        "order": 11
+      },
+      "contacts": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "संपर्क व मदत केंद्र",
+        "labelEn": "Emergency & Committee",
+        "order": 12
+      },
+      "newsletter": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "दैनिक वृत्तपत्र",
+        "labelEn": "Daily Bulletin",
+        "order": 13
+      },
+      "wings": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "इमारती (४ विंग्ज)",
+        "labelEn": "4 Buildings",
+        "order": 14
+      },
+      "polls": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "रहिवासी मतदान",
+        "labelEn": "Resident Polls",
+        "order": 15
+      },
+      "volunteer": {
+        "enabled": true,
+        "approved": true
+      },
+      "mandalInfo": {
+        "enabled": true,
+        "approved": true,
+        "labelMr": "मंडळ माहिती व सुरक्षा",
+        "labelEn": "Mandal Info",
+        "order": 17
+      }
+    },
+    "sidebarMenu": [
+      {
+        "id": "dashboard",
+        "labelMr": "मुख्य पृष्ठ",
+        "labelEn": "Dashboard",
+        "badge": "",
+        "badgeType": "active",
+        "enabled": true,
+        "order": 1,
+        "targetSection": "top",
+        "icon": "LayoutDashboard"
+      },
+      {
+        "id": "liveUpdates",
+        "labelMr": "दैनिक वृत्तपत्र",
+        "labelEn": "Daily Bulletin",
+        "badge": "LIVE",
+        "badgeType": "pill-red",
+        "enabled": true,
+        "order": 2,
+        "targetSection": "marquee",
+        "icon": "Sparkles"
+      },
+      {
+        "id": "aartiSchedule",
+        "labelMr": "दैनिक महाआरती",
+        "labelEn": "Daily Maha Aarti",
+        "badge": "आरती",
+        "badgeType": "badge-gold",
+        "enabled": true,
+        "order": 3,
+        "targetSection": "aarti",
+        "icon": "Flame"
+      },
+      {
+        "id": "schedule",
+        "labelMr": "१० दिवसांचे वेळापत्रक",
+        "labelEn": "10-Day Schedule",
+        "badge": "१० दिवस",
+        "badgeType": "badge-gold",
+        "enabled": true,
+        "order": 4,
+        "targetSection": "schedule",
+        "icon": "Calendar"
+      },
+      {
+        "id": "upcoming",
+        "labelMr": "आगामी कार्यक्रम",
+        "labelEn": "Upcoming Events",
+        "badge": "नवीन",
+        "badgeType": "badge-gold",
+        "enabled": true,
+        "order": 5,
+        "targetSection": "upcoming",
+        "icon": "Calendar"
+      },
+      {
+        "id": "wings",
+        "labelMr": "इमारती (४ विंग्ज)",
+        "labelEn": "4 Buildings",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 6,
+        "targetSection": "wings",
+        "icon": "Building2"
+      },
+      {
+        "id": "polls",
+        "labelMr": "मतदान कट्टा",
+        "labelEn": "Resident Polls",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 7,
+        "targetSection": "polls",
+        "icon": "BarChart2"
+      },
+      {
+        "id": "volunteer",
+        "labelMr": "सहभाग व सेवा",
+        "labelEn": "Volunteer Seva",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 8,
+        "targetSection": "volunteer",
+        "icon": "Users"
+      },
+      {
+        "id": "gallery",
+        "labelMr": "छायाचित्रे",
+        "labelEn": "Photo Gallery",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 9,
+        "targetSection": "gallery",
+        "icon": "Image"
+      },
+      {
+        "id": "contacts",
+        "labelMr": "संपर्क व ईमेल",
+        "labelEn": "Helplines & Email",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 10,
+        "targetSection": "contacts",
+        "icon": "PhoneCall"
+      },
+      {
+        "id": "mandalInfo",
+        "labelMr": "मंडळ माहिती व सुरक्षा",
+        "labelEn": "Mandal Info & Security",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 11,
+        "targetSection": "mandal-info",
+        "icon": "Info"
+      },
+      {
+        "id": "adminLogin",
+        "labelMr": "व्यवस्थापक कक्ष",
+        "labelEn": "Admin Portal",
+        "badge": "",
+        "badgeType": "default",
+        "enabled": true,
+        "order": 12,
+        "targetSection": "admin-login",
+        "icon": "Shield"
+      }
+    ],
+    "sidebarSettings": {
+      "showFloatingTrigger": true,
+      "bottomCardTitle": "All 4 Wings",
+      "bottomCardSubtitle": "Wings G, H, J, K",
+      "bottomCardTagline": "❤️ ५ विंग्स, एकच परिवार",
+      "bottomCardSubtag": "सहकार्य • शिस्त • अखंड भक्ती"
+    },
+    "dailyAartiSection": {
+      "enabled": true,
+      "badgeMr": "दैनिक महाआरती व यजमान",
+      "badgeEn": "Daily Maha Aarti & Host Wings",
+      "titleMr": "दैनिक महाआरती व विंग यजमान",
+      "titleEn": "Daily Maha Aarti & Host Wings",
+      "subtitleMr": "दररोज सकाळी ०८:३० व रात्री ०८:०० वाजता मुख्य मंडपात महाआरती",
+      "subtitleEn": "Every day at 08:30 AM and 07:30 PM near G wing",
+      "countdownLabelMr": "पुढील महाआरतीसाठी शिल्लक वेळ",
+      "countdownLabelEn": "Time Remaining Until Next Aarti",
+      "startDate": "2026-09-17",
+      "endDate": "2026-09-25",
+      "morningTime": "सकाळी ०८:३० वाजता",
+      "morningTimeEn": "08:30 AM",
+      "eveningTime": "रात्री ०७:३० वाजता",
+      "eveningTimeEn": "07:30 PM"
+    },
+    "dailyAartiSchedule": [
+      {
+        "dayNumber": 4,
+        "dateStr": "दिवस ४(गणेश उत्सव- १७ सप्टेंबर)",
+        "dateStrEn": "Day 4 (Ganesh Utsav - 17  Sep)",
+        "tithi": "श्री गणेश चतुर्थी (मूर्ती प्राणप्रतिष्ठा)",
+        "tithiEn": "Ganesh Chaturthi (Pranpratishtha)",
+        "hostWing": "G विंग - नंदादेवी",
+        "hostWingEn": "G Wing - Nandadevi",
+        "hostLead": "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
+        "hostLeadEn": "All Committee Members & Senior Residents",
+        "morningTime": "सकाळी ०८:३० वाजता",
+        "morningTimeEn": "08:30 AM",
+        "eveningTime": "रात्री ०८:०० वाजता",
+        "eveningTimeEn": "07:30 PM",
+        "morningRitual": "श्रींची विधिवत प्राणप्रतिष्ठा पूजा व महाआरती",
+        "morningRitualEn": "Morning Pooja & Aarti",
+        "eveningRitual": "धूप आरती, सामूहिक अथर्वशीर्ष पठण व महाआरती",
+        "eveningRitualEn": "Dhupaarti, Atharvashirsha & Maha Aarti",
+        "specialPrasad": "उकडीचे मोदक (२१ मोदक महाप्रसाद)",
+        "specialPrasadEn": "Steamed Ukadiche Modak",
+        "cultural": "दुपारी १२:०० ढोल-ताशा गजर व संध्याकाळी ६:०० लेझीम प्रात्यक्षिक",
+        "culturalEn": "12:00 PM Dhol-Tasha & 6:00 PM Lezim Demonstration",
+        "isCurrentDay": true,
+        "date": "2026-09-17",
+        "events": [
+          {
+            "id": "evt_1_m",
+            "type": "morning",
+            "categoryMr": "सकाळची महाआरती",
+            "categoryEn": "Morning Maha Aarti",
+            "titleMr": "श्रींची विधिवत प्राणप्रतिष्ठा पूजा व महाआरती",
+            "titleEn": "Morning Pooja & Aarti",
+            "time": "सकाळी ०८:३० वाजता",
+            "timeEn": "08:30 AM",
+            "startTime": "08:30",
+            "endTime": "09:30",
+            "hostWing": "G विंग - नंदादेवी",
+            "hostWingEn": "G Wing - Nandadevi",
+            "hostCoordinator": "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
+            "hostCoordinatorEn": "All Committee Members & Senior Residents",
+            "prasad": "",
+            "prasadEn": "",
+            "descriptionMr": "",
+            "descriptionEn": "",
+            "active": true
+          },
+          {
+            "id": "evt_1_e",
+            "type": "evening",
+            "categoryMr": "संध्याकाळची महाआरती",
+            "categoryEn": "Evening Maha Aarti",
+            "titleMr": "धूप आरती, सामूहिक अथर्वशीर्ष पठण व महाआरती",
+            "titleEn": "Dhupaarti, Atharvashirsha & Maha Aarti",
+            "time": "रात्री ०८:०० वाजता",
+            "timeEn": "07:30 PM",
+            "startTime": "20:00",
+            "endTime": "21:00",
+            "hostWing": "G विंग - नंदादेवी",
+            "hostWingEn": "G Wing - Nandadevi",
+            "hostCoordinator": "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
+            "hostCoordinatorEn": "All Committee Members & Senior Residents",
+            "prasad": "",
+            "prasadEn": "",
+            "descriptionMr": "",
+            "descriptionEn": "",
+            "active": true
+          }
+        ]
+      }
+    ],
+    "newsletter": {
+      "edition": "दैनिक डिजिटल वृत्तपत्र",
+      "dateStr": "",
+      "headline": "गणपती उत्सव थेट (लाइव्ह)",
+      "subheadline": "सर्व ५ इमारतींचा संयुक्त सहभाग",
+      "bappaDarshanQuote": "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
+      "darshanPhotoUrl": "",
+      "darshanPhotoCaption": "म्हाडा टॉवर्स २०२६ श्री गणरायाचे नयनरम्य प्रथम दर्शन",
+      "todaysHighlights": [
+        "सकाळी ठीक ९:३० वाजता ढोल-ताशांच्या गजरात बाप्पांचे मुख्य प्रवेशद्वारावर आगमन.",
+        "सर्व विंग्समधील सुवासिनींकडून औक्षण व विधिवत मंगल पूजा.",
+        "दुपारी १२:०० वाजता मंत्रघोषात प्राणप्रतिष्ठा व पहिली महाआरती संपन्न."
+      ],
+      "yesterdayHighlights": [
+        "मंडप सजावट, विद्युत रोषणाई व स्वागत कमानीचे काम पूर्ण."
+      ],
+      "todaysHostWing": "सर्व  ५ विंग्स संयुक्त (G, H, I, J, K)",
+      "hostLead": "म्हाडा उत्सव कमिटी पदाधिकारी",
+      "prasadSpecial": "पारंपरिक उकडीचे मोदक व पंचखाद्य",
+      "specialNote": "आरतीला येताना रहिवाशांनी शिस्तीचे पालन करावे.",
+      "editionEn": "1 day event",
+      "dateStrEn": "10 सप्टेंबर २०२६",
+      "headlineEn": "गणपती उत्सव थेट (लाइव्ह)",
+      "subheadlineEn": "All 5 wings are participated",
+      "todaysHostWingEn": "G",
+      "eveningAartiTime": "०७:०० PM",
+      "safetyTip": "कृपया वाहने नियुक्त पार्किंगमध्येच लावावीत.",
+      "safetyTipEn": "कृपया वाहने नियुक्त पार्किंगमध्येच लावावीत.",
+      "enabled": true,
+      "displayStyle": "classic",
+      "bulletinTitle": "DAILY DIGITAL BULLETIN",
+      "bulletinTitleMr": "दैनिक डिजिटल वृत्तपत्र",
+      "eventDuration": "1 day event",
+      "eventDurationMr": "१ दिवसीय सोहळा",
+      "festivalName": "Ganesh Utsav - 2026",
+      "festivalNameMr": "गणेश उत्सव - १६ सप्टेंबर",
+      "headlineMr": "गणपती उत्सव थेट (लाइव्ह)",
+      "subheadlineMr": "सर्व ५ इमारतींचा संयुक्त सहभाग",
+      "days": [
+        {
+          "id": "day_3",
+          "dayNumber": 4,
+          "dateStr": "17 Sep 2026",
+          "dateStrEn": "16 Sep 2026",
+          "dateStrMr": "१६ सप्टेंबर २०२६",
+          "festivalDayLabel": "Day 4 (Ganesh Utsav - 17 Sep)",
+          "festivalDayLabelMr": "दिवस ३ (गणेश उत्सव - १६ सप्टेंबर)",
+          "headline": "Ganpati Festival Live",
+          "headlineMr": "गणपती उत्सव थेट (लाइव्ह)",
+          "subtitle": "All 5 wings are participated",
+          "subtitleMr": "सर्व ५ इमारतींचा संयुक्त सहभाग",
+          "isCurrentDay": true,
+          "isActive": true,
+          "order": 1,
+          "blocks": [
+            {
+              "id": "blk_1",
+              "category": "aarti",
+              "title": "DAILY MAHA AARTI & HOST WINGS",
+              "titleMr": "दैनिक महाआरती व विंग यजमान",
+              "subtitle": "Murti Pranpratishtha Pooja & Maha Aarti",
+              "subtitleMr": "मूर्ती प्राणप्रतिष्ठा पूजा व महाआरती",
+              "time": "08:30 AM & 07:30 PM",
+              "timeMr": "सकाळी ०८:३० व रात्री ०७:३०",
+              "description": "Morning: 08:30 AM - Murti Pranpratishtha Pooja & Maha Aarti\nEvening: 07:30 PM - Dhupaarti, Atharvashirsha & Maha Aarti",
+              "descriptionMr": "सकाळची महाआरती: ०८:३० AM - श्रींची विधिवत प्राणप्रतिष्ठा पूजा व महाआरती\nसंध्याकाळची महाआरती: ०७:३० PM - धूप आरती, सामूहिक अथर्वशीर्ष पठण व महाआरती",
+              "badge": "Aarti",
+              "priority": "high",
+              "isActive": true,
+              "order": 1,
+              "items": [
+                {
+                  "id": "item_1",
+                  "label": "Morning Maha Aarti:",
+                  "labelMr": "सकाळची महाआरती:",
+                  "time": "08:30 AM",
+                  "timeMr": "सकाळी ०८:३०",
+                  "desc": "Murti Pranpratishtha Pooja & Maha Aarti",
+                  "descMr": "श्रींची विधिवत प्राणप्रतिष्ठा पूजा व महाआरती"
+                },
+                {
+                  "id": "item_2",
+                  "label": "Evening Maha Aarti:",
+                  "labelMr": "संध्याकाळची महाआरती:",
+                  "time": "07:30 PM",
+                  "timeMr": "रात्री ०७:३०",
+                  "desc": "Dhupaarti, Atharvashirsha & Maha Aarti",
+                  "descMr": "धूप आरती, सामूहिक अथर्वशीर्ष पठण व महाआरती"
+                }
+              ]
+            },
+            {
+              "id": "blk_2",
+              "category": "host",
+              "title": "HOST BUILDING",
+              "titleMr": "यजमान इमारत",
+              "subtitle": "All 5 Buildings Joint (G, H, I, J, K)",
+              "subtitleMr": "सर्व ५ इमारती संयुक्त (G • H • I • J • K WINGS)",
+              "description": "All Committee Members & Senior Residents",
+              "descriptionMr": "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
+              "hostCoordinator": "All Committee Members & Senior Residents",
+              "hostCoordinatorMr": "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
+              "time": "",
+              "badge": "Host",
+              "priority": "normal",
+              "isActive": true,
+              "order": 2,
+              "items": []
+            }
+          ]
+        }
+      ],
+      "subtitle": "All 5 wings are participated",
+      "subtitleMr": "सर्व ५ इमारतींचा संयुक्त सहभाग",
+      "safetyTipMr": "कृपया वाहने नियुक्त पार्किंगमध्येच लावावीत.",
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-25",
+      "showSelectDay": true,
+      "showTodayBadge": true,
+      "showCurrentDay": true
+    },
+    "wings": [
+      {
+        "code": "G",
+        "nameMr": "G विंग - नंदादेवी",
+        "nameEn": "G Wing - Nandadevi",
+        "floors": 22,
+        "flats": 88,
+        "flatsPerFloor": 4
+      },
+      {
+        "code": "H",
+        "nameMr": "H विंग - निलगिरी",
+        "nameEn": "H Wing - Nilgiri",
+        "floors": 22,
+        "flats": 88,
+        "flatsPerFloor": 4
+      },
+      {
+        "code": "J",
+        "nameMr": "J विंग - पूर्वांचल",
+        "nameEn": "J Wing - Purvanchal",
+        "floors": 22,
+        "flats": 88,
+        "flatsPerFloor": 4
+      },
+      {
+        "code": "K",
+        "nameMr": "K विंग - गोवर्धन",
+        "nameEn": "K Wing - Govardhan",
+        "floors": 22,
+        "flats": 88,
+        "flatsPerFloor": 4
+      },
+      {
+        "code": "I ",
+        "nameMr": "I विंग - ब्रह्मगिरी",
+        "nameEn": "I Wing - Brahmagiri",
+        "sacredNameMr": "",
+        "flatsCount": "४०",
+        "coordinatorLead": "",
+        "coordinatorPhone": "",
+        "aartiReservedDays": ""
+      }
+    ],
+    "rules": [
+      {
+        "id": "1",
+        "titleMr": "मंडप परिसरातील शांतता",
+        "descriptionMr": "रात्री १०:०० नंतर ध्वनिक्षेपकाचा आवाज पूर्णपणे बंद राहील.",
+        "category": "शिस्त"
+      },
+      {
+        "id": "2",
+        "titleMr": "स्वच्छता व कचरा व्यवस्थापन",
+        "descriptionMr": "प्रसादाचे द्रोण व कचरा केवळ कचराकुंडीतच टाकावा.",
+        "category": "स्वच्छता"
+      },
+      {
+        "id": "3",
+        "titleMr": "पार्किंग शिस्त",
+        "descriptionMr": "उत्सव मंडपाच्या मुख्य मार्गावर कोणतीही वाहने पार्क करू नयेत.",
+        "category": "पार्किंग"
+      }
+    ],
+    "gallery": [
+      {
+        "id": "fest_1789555339327",
+        "titleMr": "जन्माष्टमी",
+        "titleEn": "Janmashtami",
+        "nameMr": "जन्माष्टमी",
+        "nameEn": "Janmashtami",
+        "category": "गोपाल कला उत्सव",
+        "categoryEn": "Maha Aarti",
+        "year": "२०२६",
+        "yearEn": "2026",
+        "descMr": "भगवान विष्णूंचे आठवे अवतार असलेल्या भगवान श्रीकृष्णाच्या जन्मोत्सवाचा आनंददायी हिंदू सण.",
+        "descEn": "A joyful Hindu festival that celebrates the birth of Lord Krishna, the eighth avatar of Lord Vishnu.",
+        "bannerUrl": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_36-1789555804547-58770343.jpeg",
+        "imageUrl": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_36-1789555804547-58770343.jpeg",
+        "accentColor": "from-amber-700 to-maroon-900",
+        "photos": [
+          {
+            "id": "p_1789555821375_0",
+            "url": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_36__1-1789555821339-61596473.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 13 at 19.26.36 (1)",
+            "captionEn": "WhatsApp Image 2026 09 13 at 19.26.36 (1)",
+            "order": 1
+          },
+          {
+            "id": "p_1789555821375_1",
+            "url": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_35-1789555821342-240126996.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 13 at 19.26.35",
+            "captionEn": "WhatsApp Image 2026 09 13 at 19.26.35",
+            "order": 2
+          },
+          {
+            "id": "p_1789555821375_2",
+            "url": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_35__1-1789555821350-121816180.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 13 at 19.26.35 (1)",
+            "captionEn": "WhatsApp Image 2026 09 13 at 19.26.35 (1)",
+            "order": 3
+          },
+          {
+            "id": "p_1789555821375_3",
+            "url": "/uploads/WhatsApp_Image_2026-09-13_at_19_26_34-1789555821357-259487435.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 13 at 19.26.34",
+            "captionEn": "WhatsApp Image 2026 09 13 at 19.26.34",
+            "order": 4
+          }
+        ],
+        "isActive": true,
+        "order": 2
+      },
+      {
+        "id": "fest_maha_aarti_2026",
+        "titleMr": "गणपती उत्सव सोहळा २०२६",
+        "titleEn": "Ganpati Utsav HIG  2026",
+        "nameMr": "गणपती उत्सव सोहळा २०२६",
+        "nameEn": "Ganpati Utsav HIG  2026",
+        "category": "महाआरती",
+        "categoryEn": "Maha Aarti",
+        "year": "२०२६",
+        "yearEn": "2026",
+        "descMr": "म्हाडा टॉवर्स गणेशोत्सवातील नयनरम्य महाआरती सोहळा व भाविकांची उपस्थिती.",
+        "descEn": "Divine Maha Aarti moments during MHADA Towers Ganesh Utsav 2026.",
+        "bannerUrl": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_49__1-1789555324164-664556242.jpeg",
+        "imageUrl": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_49__1-1789555324164-664556242.jpeg",
+        "accentColor": "from-amber-700 to-maroon-900",
+        "photos": [
+          {
+            "id": "1789492777432",
+            "url": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_50-1789492777411-894003354.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 15 at 22.47.50",
+            "captionEn": "WhatsApp Image 2026 09 15 at 22.47.50",
+            "order": 1
+          },
+          {
+            "id": "1789492777433",
+            "url": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_49-1789492777412-930568854.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 15 at 22.47.49",
+            "captionEn": "WhatsApp Image 2026 09 15 at 22.47.49",
+            "order": 2
+          },
+          {
+            "id": "1789492777434",
+            "url": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_49__1-1789492777416-557364406.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 15 at 22.47.49 (1)",
+            "captionEn": "WhatsApp Image 2026 09 15 at 22.47.49 (1)",
+            "order": 3
+          },
+          {
+            "id": "1789492777435",
+            "url": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_48-1789492777420-856474368.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 15 at 22.47.48",
+            "captionEn": "WhatsApp Image 2026 09 15 at 22.47.48",
+            "order": 4
+          },
+          {
+            "id": "1789492562386",
+            "url": "/uploads/WhatsApp_Image_2026-09-15_at_22_47_49__1-1789492754935-374985823.jpeg",
+            "captionMr": "WhatsApp Image 2026 09 15 at 22.47.49 (1)",
+            "captionEn": "Ganesh Utsav Photo",
+            "order": 5
+          }
+        ],
+        "isActive": true,
+        "order": 1
+      }
+    ],
+    "poll": {
+      "active": true,
+      "question": "यंदाच्या गणेशोत्सवात आपल्याला कोणता सांस्कृतिक उपक्रम सर्वात जास्त आवडेल?",
+      "options": [
+        {
+          "id": 1,
+          "text": "पारंपरिक भजन व नाट्यसंगीत संध्या",
+          "votes": 0
+        },
+        {
+          "id": 2,
+          "text": "लहान मुलांच्या चित्रकला व वकृत्व स्पर्धा",
+          "votes": 0
+        },
+        {
+          "id": 3,
+          "text": "महिला मंडळाचा पारंपरिक हळदी-कुंकू व खेळ",
+          "votes": 0
+        },
+        {
+          "id": 4,
+          "text": "आरोग्य व रक्तदान तपासणी शिबिर",
+          "votes": 0
+        }
+      ],
+      "totalVotes": 0,
+      "questionEn": ""
+    },
+    "volunteerSeva": {
+      "active": true,
+      "title": "गणेशोत्सव स्वयंसेवक सेवा नोंदणी",
+      "description": "आपल्या लाडक्या बाप्पाच्या उत्सवात सेवा करण्याची सुवर्णसंधी.",
+      "roles": [
+        "मंडप व्यवस्थापन",
+        "प्रसाद वाटप",
+        "आरती व्यवस्था",
+        "रांग नियंत्रण",
+        "सांस्कृतिक कार्यक्रम"
+      ],
+      "titleEn": "Volunteer Registration",
+      "descriptionEn": ""
+    },
+    "mandalInfo": {
+      "historyMr": "म्हाडा टॉवर्स उत्सव मंडळाची स्थापना सर्व ४ इमारतींच्या रहिवाशांमध्ये एकात्मता व बंधुभाव निर्माण करण्यासाठी करण्यात आली आहे.",
+      "historyEn": "Established to foster brotherhood and unity among all four wings of MHADA Towers.",
+      "establishedYear": "२०२४",
+      "regDetails": "F ६३३६८ - पुणे",
+      "mottoMr": "5 विंग्स, एकच परिवार (सहकार्य • शिस्त • अखंड भक्ती)",
+      "officeAddressMr": "पिंपरी वाघेरे, पिंपरी चिंचवड, पुणे - ४११०१७",
+      "helpline": "+",
+      "email": "mhadatowersutsavmandal@gmail.com",
+      "bankDetails": {
+        "accountName": "MHADA TOWERS GANESHOTSAV MANDAL",
+        "bankName": "State Bank of India",
+        "accountNo": "XXXXXXXXX1234",
+        "ifsc": "SBIN0001234",
+        "upiId": "mhadatowers@sbi"
+      },
+      "pillars": [],
+      "committeeMembers": [
+        {
+          "roleMr": "अध्यक्षा",
+          "roleEn": "President",
+          "nameMr": "सौ. प्रियांका मयूर देशपांडे",
+          "nameEn": "Mrs. Priyanka Mayur Deshpande",
+          "wing": "जे – १५०३ (J-1503)",
+          "phone": ""
+        },
+        {
+          "roleMr": "उपाध्यक्षा",
+          "roleEn": "Vice President",
+          "nameMr": "सौ. हर्षानी निकुंभ",
+          "nameEn": "Mrs. Harshani Nikumbh",
+          "wing": "के – १००१ (K-1001)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सचिव",
+          "roleEn": "Secretary",
+          "nameMr": "सौ. अर्चना सुधींद्र मठड",
+          "nameEn": "Mrs. Archana Sudhindra Mathad",
+          "wing": "जी – २२०४, जे – ५०३ (G-2204, J-503)",
+          "phone": ""
+        },
+        {
+          "roleMr": "खजिनदार",
+          "roleEn": "Treasurer",
+          "nameMr": "श्री. अनुराग माळी",
+          "nameEn": "Mr. Anurag Mali",
+          "wing": "के – १५०३ (K-1503)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्या",
+          "roleEn": "Committee Member",
+          "nameMr": "श्रीमती कल्पना अविनाश गाजरे",
+          "nameEn": "Mrs. Kalpana Avinash Gajare",
+          "wing": "के – १००२-१८०२ (K-1002-1802)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्या",
+          "roleEn": "Committee Member",
+          "nameMr": "सौ. शीतल प्रफुल साठे",
+          "nameEn": "Mrs. Sheetal Praful Sathe",
+          "wing": "जी – ११०४ (G-1104)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्या",
+          "roleEn": "Committee Member",
+          "nameMr": "सौ. कुंदा राजेंद्र सौंदणकर",
+          "nameEn": "Mrs. Kunda Rajendra Saundankar",
+          "wing": "एच – १०३ (H-103)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्य",
+          "roleEn": "Committee Member",
+          "nameMr": "श्री. सतीश बालकु फडके",
+          "nameEn": "Mr. Satish Balku Phadke",
+          "wing": "के – १५०१ (K-1501)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्या",
+          "roleEn": "Committee Member",
+          "nameMr": "सौ. आदिती साबू",
+          "nameEn": "Mrs. Aditi Sabu",
+          "wing": "जे – ११०२ (J-1102)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्य",
+          "roleEn": "Committee Member",
+          "nameMr": "श्री. तेजस माळी",
+          "nameEn": "Mr. Tejas Mali",
+          "wing": "जी – १००१ (G-1001)",
+          "phone": ""
+        },
+        {
+          "roleMr": "सदस्या",
+          "roleEn": "Committee Member",
+          "nameMr": "सौ. प्रतिमा प्रशांत कुलकर्णी",
+          "nameEn": "Mrs. Pratima Prashant Kulkarni",
+          "wing": "एच – १६०४ (H-1604)",
+          "phone": ""
+        }
+      ]
+    },
+    "updatedAt": "2026-09-17T12:37:15.079Z",
+    "festivalScheduleCard": {
+      "eventNameMr": "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य उत्सव)",
+      "eventNameEn": "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
+      "eventDescriptionMr": "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
+      "eventDescriptionEn": "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, I, J, K) of MHADA Towers.",
+      "plannerMr": "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
+      "plannerEn": "MHADA Towers Utsav Mandal & Central Society Committee",
+      "plannerDetailsMr": "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)",
+      "plannerDetailsEn": "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)",
+      "imageUrl": "/uploads/WhatsApp_Image_2026-09-15_at_22_28_01-1789491506299-483063137.jpeg",
+      "imageCaptionMr": "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा",
+      "imageCaptionEn": "Festival Schedule & Complete Event Blueprint"
+    }
+  },
+  "announcements": [
+    {
+      "_id": "ann_1",
+      "titleMr": "दैनिक महाआरती वेळेबाबत सर्व रहिवाशांना नम्र विनंती",
+      "titleEn": "Gentle reminder regarding Daily Aarti Timings",
+      "descriptionMr": "सकाळची आरती ठीक ८:३० वा. व संध्याकाळची महाआरती ठीक ७:३० वा. सुरू होईल. सर्वांनी १० मिनिटे आधी मंडपात हजर राहावे.",
+      "descriptionEn": "Morning Aarti starts promptly at 8:30 AM and Evening Aarti at 7:30 PM. Kindly arrive 10 minutes earlier.",
+      "category": "aarti",
+      "priority": "high",
+      "isPinned": true,
+      "badgeText": "आरती वेळ (Aarti Alert)",
+      "isActive": true,
+      "createdAt": "2026-09-14T14:31:23.332Z",
+      "targetWings": [
+        "All"
+      ],
+      "updatedAt": "2026-09-15T17:09:26.588Z"
+    },
+    {
+      "_id": "ann_2",
+      "titleMr": "मंडप परिसरातील शांतता व पार्किंग नियमावली",
+      "titleEn": "Society Parking & Noise Rules around Pandal",
+      "descriptionMr": "मुख्य मंडपाच्या समोरील रस्ता पादचाऱ्यांसाठी राखीव आहे. कृपया दोनचाकी व चारचाकी वाहने आपापल्या पार्किंग स्लॉटमध्येच लावावीत.",
+      "descriptionEn": "Please park all vehicles in designated resident slots. Emergency access path must remain clear at all times.",
+      "category": "general",
+      "priority": "normal",
+      "isPinned": false,
+      "badgeText": "पार्किंग सूचना (Rules)",
+      "isActive": true,
+      "createdAt": "2026-09-14T14:31:23.332Z"
+    },
+    {
+      "_id": "ann_3",
+      "titleMr": "फ्लॅट धारकांसाठी: उत्सव जमा-खर्च व देणगी तपशील",
+      "titleEn": "Owners Corner: Utsav Accounts & Mandal Meeting Updates",
+      "descriptionMr": "उत्सवासाठी जमा झालेली ऐच्छिक वर्गणी व मंडप खर्चाचा प्राथमिक हिशेब व्यवस्थापकीय सूचना फलकावर दररोज संध्याकाळी अद्ययावत केला जात आहे.",
+      "descriptionEn": "Voluntary collections and daily festival expense balance sheet is transparently reviewed by the committee.",
+      "category": "owners",
+      "priority": "normal",
+      "isPinned": false,
+      "badgeText": "सभासद कट्टा (Owners Info)",
+      "isActive": true,
+      "createdAt": "2026-09-14T14:31:23.332Z"
+    }
+  ],
+  "events": [
+    {
+      "_id": "ev_4",
+      "category": "visarjan",
+      "categoryEn": "Visarjan",
+      "eventType": "festival",
+      "titleMr": "भावपूर्ण विसर्जन मिरवणूक व पर्यावरणपूरक निरोप",
+      "titleEn": "Emotional Visarjan Procession & Eco-Immersion",
+      "startDate": "2026-09-25",
+      "startTime": "15:30",
+      "endDate": "2026-09-25",
+      "endTime": "21:00",
+      "startDateTime": "2026-09-25T10:00:00.000Z",
+      "endDateTime": "2026-09-25T15:30:00.000Z",
+      "time": "दुपारी ०३:३० पासून मिरवणूक",
+      "dateStr": "अनंत चतुर्दशी (दिवस १० / १६ सप्टेंबर)",
+      "dateStrEn": "Day 10 (16 September 2026)",
+      "dayNumber": 10,
+      "venue": "परिसरात उभारण्यात आलेला कृत्रिम विसर्जन हौद",
+      "venueEn": "Dedicated Artificial Water Tank",
+      "hostWing": "समस्त म्हाडा टॉवर्स नागरिक",
+      "hostWingEn": "All MHADA Towers Residents",
+      "targetAudience": "समस्त म्हाडा टॉवर्स नागरिक",
+      "targetAudienceEn": "All MHADA Towers Residents",
+      "descriptionMr": "गुलाल व फुलांच्या वर्षावात टाळ-मृदुंगाच्या नादात लाडक्या बाप्पाला भावपूर्ण निरोप. पर्यावरण संवर्धनासाठी मंडळातर्फे १००% कृत्रिम हौदातच विसर्जन करण्यात येईल.",
+      "descriptionEn": "Grand farewell procession followed by 100% eco-friendly immersion in society's designated artificial water tank.",
+      "imageUrl": "",
+      "isHighlight": true,
+      "isPublished": true,
+      "status": "upcoming",
+      "order": 0,
+      "createdAt": "2026-09-14T14:31:23.332Z",
+      "updatedAt": "2026-09-16T07:19:29.893Z"
+    },
+    {
+      "_id": "ev_1789543010247",
+      "createdAt": "2026-09-16T07:16:50.247Z",
+      "isPublished": true,
+      "targetAudience": "सर्व विंग्ज (G, H, J, K)",
+      "targetAudienceEn": "All Wings (G, H, J, K)",
+      "category": "cultural",
+      "categoryEn": "cultural",
+      "eventType": "yearly",
+      "titleMr": "२०२६-२०२७ मधील आगामी कार्यक्रमांची यादी",
+      "titleEn": "Upcoming Events List 2026-2027",
+      "startDate": "2026-09-16",
+      "startTime": "16:00",
+      "endDate": "2026-09-16",
+      "endTime": "20:00",
+      "startDateTime": "2026-09-16T10:30:00.000Z",
+      "endDateTime": "2026-09-16T14:30:00.000Z",
+      "time": "04:00 PM - 08:00 PM",
+      "dateStr": "16 सप्टेंबर 2026",
+      "dateStrEn": "16 Sep 2026",
+      "dayNumber": 1,
+      "venue": "मुख्य मंडप, म्हाडा टॉवर्स",
+      "venueEn": "Main Pandal, MHADA Towers",
+      "hostWing": "सर्व विंग्ज (G, H, J, K)",
+      "hostWingEn": "All Wings (G, H, J, K)",
+      "descriptionMr": "",
+      "descriptionEn": "",
+      "isHighlight": false,
+      "imageUrl": "/uploads/WhatsApp_Image_2026-09-15_at_22_40_52-1789542957829-919637069.jpeg",
+      "status": "upcoming",
+      "order": 0,
+      "updatedAt": "2026-09-16T20:31:17.432Z"
+    },
+    {
+      "_id": "ev_1789543411107",
+      "createdAt": "2026-09-16T07:23:31.107Z",
+      "isPublished": true,
+      "targetAudience": "सर्व विंग्ज (G, H, I, J, K)",
+      "targetAudienceEn": "All Wings (G, H, I, J, K)",
+      "category": "cultural",
+      "categoryEn": "cultural",
+      "eventType": "festival",
+      "titleMr": "गणपती उत्सव २०२६",
+      "titleEn": "Ganpati Utsav 2026",
+      "startDate": "2026-09-14",
+      "startTime": "17:00",
+      "endDate": "2026-09-25",
+      "endTime": "20:00",
+      "startDateTime": "2026-09-14T11:30:00.000Z",
+      "endDateTime": "2026-09-25T14:30:00.000Z",
+      "time": "05:00 PM - 08:00 PM",
+      "dateStr": "14 सप्टेंबर 2026",
+      "dateStrEn": "14 Sep 2026",
+      "dayNumber": 1,
+      "venue": "मुख्य मंडप, म्हाडा टॉवर्स",
+      "venueEn": "Main Pandal, MHADA Towers",
+      "hostWing": "सर्व विंग्ज (G, H, I, J, K)",
+      "hostWingEn": "All Wings (G, H, I, J, K)",
+      "descriptionMr": "",
+      "descriptionEn": "",
+      "isHighlight": false,
+      "imageUrl": "",
+      "status": "live",
+      "order": 0
+    }
+  ],
+  "contacts": [
+    {
+      "_id": "contact_1",
+      "nameMr": "सौ. प्रियांका मयूर देशपांडे",
+      "nameEn": "Mrs. Priyanka Mayur Deshpande",
+      "roleMr": "अध्यक्षा",
+      "roleEn": "President",
+      "wing": "जे – १५०३ (J-1503)",
+      "phone": "",
+      "type": "committee",
+      "order": 1,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_2",
+      "nameMr": "सौ. हर्षानी निकुंभ",
+      "nameEn": "Mrs. Harshani Nikumbh",
+      "roleMr": "उपाध्यक्षा",
+      "roleEn": "Vice President",
+      "wing": "के – १००१ (K-1001)",
+      "phone": "",
+      "type": "committee",
+      "order": 2,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_3",
+      "nameMr": "सौ. अर्चना सुधींद्र मठड",
+      "nameEn": "Mrs. Archana Sudhindra Mathad",
+      "roleMr": "सचिव",
+      "roleEn": "Secretary",
+      "wing": "जी – २२०४, जे – ५०३ (G-2204, J-503)",
+      "phone": "",
+      "type": "committee",
+      "order": 3,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_4",
+      "nameMr": "श्री. अनुराग माळी",
+      "nameEn": "Mr. Anurag Mali",
+      "roleMr": "खजिनदार",
+      "roleEn": "Treasurer",
+      "wing": "के – १५०३ (K-1503)",
+      "phone": "",
+      "type": "committee",
+      "order": 4,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_5",
+      "nameMr": "श्रीमती कल्पना अविनाश गाजरे",
+      "nameEn": "Mrs. Kalpana Avinash Gajare",
+      "roleMr": "सदस्या",
+      "roleEn": "Committee Member",
+      "wing": "के – १००२-१८०२ (K-1002-1802)",
+      "phone": "",
+      "type": "committee",
+      "order": 5,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_6",
+      "nameMr": "सौ. शीतल प्रफुल साठे",
+      "nameEn": "Mrs. Sheetal Praful Sathe",
+      "roleMr": "सदस्या",
+      "roleEn": "Committee Member",
+      "wing": "जी – ११०४ (G-1104)",
+      "phone": "",
+      "type": "committee",
+      "order": 6,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_7",
+      "nameMr": "सौ. कुंदा राजेंद्र सौंदणकर",
+      "nameEn": "Mrs. Kunda Rajendra Saundankar",
+      "roleMr": "सदस्या",
+      "roleEn": "Committee Member",
+      "wing": "एच – १०३ (H-103)",
+      "phone": "",
+      "type": "committee",
+      "order": 7,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_8",
+      "nameMr": "श्री. सतीश बालकु फडके",
+      "nameEn": "Mr. Satish Balku Phadke",
+      "roleMr": "सदस्य",
+      "roleEn": "Committee Member",
+      "wing": "के – १५०१ (K-1501)",
+      "phone": "",
+      "type": "committee",
+      "order": 8,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_9",
+      "nameMr": "सौ. आदिती साबू",
+      "nameEn": "Mrs. Aditi Sabu",
+      "roleMr": "सदस्या",
+      "roleEn": "Committee Member",
+      "wing": "जे – ११०२ (J-1102)",
+      "phone": "",
+      "type": "committee",
+      "order": 9,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_10",
+      "nameMr": "श्री. तेजस माळी",
+      "nameEn": "Mr. Tejas Mali",
+      "roleMr": "सदस्य",
+      "roleEn": "Committee Member",
+      "wing": "जी – १००१ (G-1001)",
+      "phone": "",
+      "type": "committee",
+      "order": 10,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_11",
+      "nameMr": "सौ. प्रतिमा प्रशांत कुलकर्णी",
+      "nameEn": "Mrs. Pratima Prashant Kulkarni",
+      "roleMr": "सदस्या",
+      "roleEn": "Committee Member",
+      "wing": "एच – १६०४ (H-1604)",
+      "phone": "",
+      "type": "committee",
+      "order": 11,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    },
+    {
+      "_id": "contact_12",
+      "nameMr": "श्री. चेतनकुमार उत्तमराव सौंदाणे",
+      "nameEn": "Mr. Chetankumar Uttamrao Soundane",
+      "roleMr": "सदस्य",
+      "roleEn": "Committee Member",
+      "wing": "के – १०३ (K-103)",
+      "phone": "",
+      "type": "committee",
+      "order": 12,
+      "createdAt": "2026-09-14T14:31:23.333Z"
+    }
+  ],
+  "receipts": [
+    {
+      "_id": "rcpt_1789578699211",
+      "receiptNo": "MT/2026/00001",
+      "residentName": "Ram",
+      "flatNo": "G- 502",
+      "building": "Wing G - नंदादेवी",
+      "purpose": "श्री गणेशोत्सव वर्गणी (Ganesh Utsav Contribution)",
+      "amount": 1001,
+      "amountInWords": "One Thousand One Rupees Only",
+      "paymentDate": "2026-09-16",
+      "paymentMode": "UPI",
+      "transactionRef": "",
+      "description": "Received with sincere thanks from the resident towards thanking for your contribution for MHADA Towers Utsav Mandal.",
+      "notes": "",
+      "sachivSignatureUrl": "",
+      "createdBy": "म्हाडा उत्सव समिती अध्यक्ष (Admin)",
+      "createdAt": "2026-09-16T17:11:39.211Z",
+      "updatedAt": "2026-09-16T17:11:39.211Z"
+    }
+  ],
+  "receiptSettings": {
+    "sachivSignatureUrl": "",
+    "receiptPrefix": "MT"
+  },
+  "volunteers": []
+}
