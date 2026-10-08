@@ -49,8 +49,8 @@ const AartiScheduleManager = ({
     badgeEn: "Daily Maha Aarti & Host Wings",
     titleMr: "दैनिक महाआरती व विंग यजमान",
     titleEn: "Daily Maha Aarti & Host Wings",
-    subtitleMr: "दररोज सकाळी ०८:३० व रात्री ०८:०० वाजता मुख्य मंडपात महाआरती",
-    subtitleEn: "Every day at 08:30 AM and 07:30 PM near G wing",
+    subtitleMr: "",
+    subtitleEn: "",
     countdownLabelMr: "पुढील महाआरतीसाठी शिल्लक वेळ",
     countdownLabelEn: "Time Remaining Until Next Aarti",
     startDate: "2026-09-07",
@@ -161,6 +161,12 @@ const AartiScheduleManager = ({
   const [isSavingCard, setIsSavingCard] = useState(false);
   const [previewModalImg, setPreviewModalImg] = useState(null);
   const fileInputRef = useRef(null);
+  const isCardDirtyRef = useRef(false);
+
+  const updateCardField = (field, value) => {
+    isCardDirtyRef.current = true;
+    setCardForm((prev) => ({ ...prev, [field]: value }));
+  };
 
   useEffect(() => {
     const tabEnabled = config?.tabs?.aarti?.enabled !== false;
@@ -190,20 +196,28 @@ const AartiScheduleManager = ({
       const cloned = JSON.parse(JSON.stringify(config.dailyAartiSchedule));
       setSchedule(cloned.map(normalizeDayForAdmin));
     }
-    if (config?.festivalScheduleCard) {
-      const clean = (val, fb) => (typeof val === "string" && val.trim() && !val.includes("??") && !val.includes("\ufffd") ? val : fb);
+    if (config?.festivalScheduleCard && !isCardDirtyRef.current) {
+      const cleanReq = (val, fb) => (typeof val === "string" && val.trim() && !val.includes("??") && !val.includes("\ufffd") ? val : fb);
+      const cleanOpt = (val, fb) => {
+        if (typeof val === "string") {
+          if (val.includes("??") || val.includes("\ufffd")) return fb;
+          return val;
+        }
+        return fb;
+      };
+
       setCardForm({
-        eventNameMr: clean(config.festivalScheduleCard.eventNameMr, "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य सोहळा)"),
-        eventNameEn: clean(config.festivalScheduleCard.eventNameEn, "Shree Ganeshotsav 2026 (10-Day Grand Celebration)"),
-        eventDescriptionMr: clean(config.festivalScheduleCard.eventDescriptionMr, "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा."),
-        eventDescriptionEn: clean(config.festivalScheduleCard.eventDescriptionEn, "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers."),
-        plannerMr: clean(config.festivalScheduleCard.plannerMr, "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती"),
-        plannerEn: clean(config.festivalScheduleCard.plannerEn, "MHADA Towers Utsav Mandal & Central Society Committee"),
-        plannerDetailsMr: clean(config.festivalScheduleCard.plannerDetailsMr, "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)"),
-        plannerDetailsEn: clean(config.festivalScheduleCard.plannerDetailsEn, "All 4 Building Wing Leads & Volunteer Squad (Wings G, H, J, K)"),
+        eventNameMr: cleanReq(config.festivalScheduleCard.eventNameMr, "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य सोहळा)"),
+        eventNameEn: cleanReq(config.festivalScheduleCard.eventNameEn, "Shree Ganeshotsav 2026 (10-Day Grand Celebration)"),
+        eventDescriptionMr: cleanOpt(config.festivalScheduleCard.eventDescriptionMr, "म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G, H, I, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा."),
+        eventDescriptionEn: cleanOpt(config.festivalScheduleCard.eventDescriptionEn, "10-day grand festival celebration organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers."),
+        plannerMr: cleanReq(config.festivalScheduleCard.plannerMr, "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती"),
+        plannerEn: cleanReq(config.festivalScheduleCard.plannerEn, "MHADA Towers Utsav Mandal & Central Society Committee"),
+        plannerDetailsMr: cleanOpt(config.festivalScheduleCard.plannerDetailsMr, "सर्व ५ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, I, J, K)"),
+        plannerDetailsEn: cleanOpt(config.festivalScheduleCard.plannerDetailsEn, "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)"),
         imageUrl: config.festivalScheduleCard.imageUrl || "",
-        imageCaptionMr: clean(config.festivalScheduleCard.imageCaptionMr, "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा"),
-        imageCaptionEn: clean(config.festivalScheduleCard.imageCaptionEn, "Festival Schedule & Complete Event Blueprint")
+        imageCaptionMr: cleanOpt(config.festivalScheduleCard.imageCaptionMr, "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा"),
+        imageCaptionEn: cleanOpt(config.festivalScheduleCard.imageCaptionEn, "Festival Schedule & Complete Event Blueprint")
       });
     }
   }, [config]);
@@ -229,17 +243,30 @@ const AartiScheduleManager = ({
       formData.append("image", file);
       formData.append("category", "schedule");
 
-      const res = await API.post("/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await API.post("/upload", formData);
 
       if (res.data?.success && (res.data.imageUrl || res.data.url)) {
         const uploadedUrl = res.data.imageUrl || res.data.url;
-        setCardForm(prev => ({ ...prev, imageUrl: uploadedUrl }));
+        const updated = {
+          ...cardForm,
+          imageUrl: uploadedUrl,
+          eventNameMr: cardForm.eventNameMr || cardForm.eventNameEn || "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य सोहळा)",
+          eventNameEn: cardForm.eventNameEn || cardForm.eventNameMr || "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
+          plannerMr: cardForm.plannerMr || cardForm.plannerEn || "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
+          plannerEn: cardForm.plannerEn || cardForm.plannerMr || "MHADA Towers Utsav Mandal & Central Society Committee"
+        };
+        setCardForm(updated);
+        isCardDirtyRef.current = false;
+
+        // Auto-save immediately so uploaded photo persists in DB and updates home screen
+        if (onSaveFestivalScheduleCard) {
+          await onSaveFestivalScheduleCard(updated);
+        }
+
         onNotify(
           isEn 
-            ? "Festival schedule photo uploaded successfully!" 
-            : "उत्सव वेळापत्रक फोटो यशस्वीरीत्या अपलोड झाला!", 
+            ? "Festival schedule photo uploaded and saved successfully!" 
+            : "उत्सव वेळापत्रक फोटो यशस्वीरीत्या अपलोड व जतन झाला!", 
           "success"
         );
       } else {
@@ -249,10 +276,23 @@ const AartiScheduleManager = ({
       console.error("Image upload error:", err);
       // Fallback: Read locally via FileReader as DataURL
       const reader = new FileReader();
-      reader.onload = (loadEvent) => {
-        setCardForm(prev => ({ ...prev, imageUrl: loadEvent.target.result }));
+      reader.onload = async (loadEvent) => {
+        const dataUrl = loadEvent.target.result;
+        const updated = {
+          ...cardForm,
+          imageUrl: dataUrl,
+          eventNameMr: cardForm.eventNameMr || cardForm.eventNameEn || "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य सोहळा)",
+          eventNameEn: cardForm.eventNameEn || cardForm.eventNameMr || "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
+          plannerMr: cardForm.plannerMr || cardForm.plannerEn || "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
+          plannerEn: cardForm.plannerEn || cardForm.plannerMr || "MHADA Towers Utsav Mandal & Central Society Committee"
+        };
+        setCardForm(updated);
+        isCardDirtyRef.current = false;
+        if (onSaveFestivalScheduleCard) {
+          await onSaveFestivalScheduleCard(updated);
+        }
         onNotify(
-          isEn ? "Photo attached locally" : "स्थानिक फोटो जोडला गेला", 
+          isEn ? "Photo attached and saved locally" : "स्थानिक फोटो जोडला व जतन केला", 
           "info"
         );
       };
@@ -267,14 +307,31 @@ const AartiScheduleManager = ({
   const handleSaveCard = async (e) => {
     if (e) e.preventDefault();
     setIsSavingCard(true);
+
+    const payloadToSave = {
+      ...cardForm,
+      eventNameMr: (cardForm.eventNameMr || cardForm.eventNameEn || "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य सोहळा)").trim(),
+      eventNameEn: (cardForm.eventNameEn || cardForm.eventNameMr || "Shree Ganeshotsav 2026 (10-Day Grand Celebration)").trim(),
+      plannerMr: (cardForm.plannerMr || cardForm.plannerEn || "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती").trim(),
+      plannerEn: (cardForm.plannerEn || cardForm.plannerMr || "MHADA Towers Utsav Mandal & Central Society Committee").trim(),
+      eventDescriptionMr: (cardForm.eventDescriptionMr ?? "").trim(),
+      eventDescriptionEn: (cardForm.eventDescriptionEn ?? "").trim(),
+      plannerDetailsMr: (cardForm.plannerDetailsMr ?? "").trim(),
+      plannerDetailsEn: (cardForm.plannerDetailsEn ?? "").trim(),
+      imageCaptionMr: (cardForm.imageCaptionMr ?? "").trim(),
+      imageCaptionEn: (cardForm.imageCaptionEn ?? "").trim(),
+      imageUrl: (cardForm.imageUrl ?? "").trim()
+    };
+
     let res;
     if (onSaveFestivalScheduleCard) {
-      res = await onSaveFestivalScheduleCard(cardForm);
+      res = await onSaveFestivalScheduleCard(payloadToSave);
     } else if (onSaveAartiSchedule) {
-      res = await onSaveAartiSchedule(schedule);
+      res = await onSaveAartiSchedule(schedule, { festivalScheduleCard: payloadToSave });
     }
     setIsSavingCard(false);
     if (res?.success) {
+      isCardDirtyRef.current = false;
       onNotify(
         isEn 
           ? "Festival event, planner and photo saved successfully!" 
@@ -541,7 +598,9 @@ const AartiScheduleManager = ({
         hostLead: mEvt?.hostCoordinator || day.hostLead || "",
         hostLeadEn: mEvt?.hostCoordinatorEn || day.hostLeadEn || "",
         specialPrasad: mEvt?.prasad || eEvt?.prasad || day.specialPrasad || "",
-        specialPrasadEn: mEvt?.prasadEn || eEvt?.prasadEn || day.specialPrasadEn || ""
+        specialPrasadEn: mEvt?.prasadEn || eEvt?.prasadEn || day.specialPrasadEn || "",
+        cultural: day.cultural || "",
+        culturalEn: day.culturalEn || ""
       };
     });
 
@@ -550,11 +609,13 @@ const AartiScheduleManager = ({
         ...sectionHeaders,
         enabled: isSectionEnabled
       },
-      aartiTabEnabled: isSectionEnabled
+      aartiTabEnabled: isSectionEnabled,
+      festivalScheduleCard: cardForm
     });
 
     setIsSaving(false);
     if (res?.success) {
+      isCardDirtyRef.current = false;
       onNotify(
         isEn 
           ? "Daily Aarti and Host Wings schedule saved successfully!" 
@@ -586,6 +647,7 @@ const AartiScheduleManager = ({
 
     const updated = { ...cardForm, imageUrl: "" };
     setCardForm(updated);
+    isCardDirtyRef.current = false;
     if (onSaveFestivalScheduleCard) {
       const res = await onSaveFestivalScheduleCard(updated);
       if (res?.success) {
@@ -902,7 +964,7 @@ const AartiScheduleManager = ({
 
                     <button
                       type="button"
-                      onClick={() => setCardForm(prev => ({ ...prev, imageUrl: "" }))}
+                      onClick={handleDeletePhoto}
                       className="py-2 px-3 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer"
                       title={isEn ? "Remove photo" : "फोटो काढा"}
                     >
@@ -939,7 +1001,7 @@ const AartiScheduleManager = ({
                   label={isEn ? "Or Paste Image URL directly:" : "किंवा थेट इमेज URL पेस्ट करा:"}
                   icon={LinkIcon}
                   value={cardForm.imageUrl || ""}
-                  onChange={(e) => setCardForm(prev => ({ ...prev, imageUrl: e.target.value }))}
+                  onChange={(e) => updateCardField("imageUrl", e.target.value)}
                   placeholder="https://... or /uploads/..."
                 />
               </div>
@@ -950,10 +1012,7 @@ const AartiScheduleManager = ({
                   label={isEn ? "Image Caption / Blueprint Note:" : "फोटो मथळा / रूपरेषा टीप:"}
                   icon={Sparkles}
                   value={isEn ? (cardForm.imageCaptionEn || "") : (cardForm.imageCaptionMr || "")}
-                  onChange={(e) => setCardForm(prev => ({
-                    ...prev,
-                    [isEn ? "imageCaptionEn" : "imageCaptionMr"]: e.target.value
-                  }))}
+                  onChange={(e) => updateCardField(isEn ? "imageCaptionEn" : "imageCaptionMr", e.target.value)}
                   placeholder={isEn ? "e.g. Festival Schedule & Complete Event Blueprint" : "उदा. उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा"}
                 />
               </div>
@@ -980,10 +1039,7 @@ const AartiScheduleManager = ({
                   label={isEn ? "What the Event actually is (Event Title) *" : "काय कार्यक्रम आहे (उत्सव / कार्यक्रम शीर्षक) *"}
                   icon={Calendar}
                   value={isEn ? (cardForm.eventNameEn || "") : (cardForm.eventNameMr || "")}
-                  onChange={(e) => setCardForm(prev => ({
-                    ...prev,
-                    [isEn ? "eventNameEn" : "eventNameMr"]: e.target.value
-                  }))}
+                  onChange={(e) => updateCardField(isEn ? "eventNameEn" : "eventNameMr", e.target.value)}
                   placeholder={
                     isEn 
                       ? "e.g. Shree Ganeshotsav 2026 (10-Day Grand Celebration)" 
@@ -1005,14 +1061,11 @@ const AartiScheduleManager = ({
                   label={isEn ? "Detailed Event Description (What actually happens during this event):" : "कार्यक्रमाचे सविस्तर वर्णन (कार्यक्रमाचे स्वरूप व माहिती):"}
                   rows={3}
                   value={isEn ? (cardForm.eventDescriptionEn || "") : (cardForm.eventDescriptionMr || "")}
-                  onChange={(e) => setCardForm(prev => ({
-                    ...prev,
-                    [isEn ? "eventDescriptionEn" : "eventDescriptionMr"]: e.target.value
-                  }))}
+                  onChange={(e) => updateCardField(isEn ? "eventDescriptionEn" : "eventDescriptionMr", e.target.value)}
                   placeholder={
                     isEn 
-                      ? "e.g. 10-day grand festival celebration and cultural programs organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers." 
-                      : "उदा. म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G-नंदादेवी, H-निलगिरी, J-पूर्वांचल, K-गोवर्धन) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव व सांस्कृतिक सोहळा."
+                      ? "e.g. 10-day grand festival celebration and cultural programs organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers." 
+                      : "उदा. म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G-नंदादेवी, H-निलगिरी, I-ब्रह्मगिरी, J-पूर्वांचल, K-गोवर्धन) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव व सांस्कृतिक सोहळा."
                   }
                 />
               </div>
@@ -1023,10 +1076,7 @@ const AartiScheduleManager = ({
                   label={isEn ? "Its Planner / Organizing Committee *" : "उत्सव नियोजन / मुख्य आयोजक मंडळ *"}
                   icon={Users}
                   value={isEn ? (cardForm.plannerEn || "") : (cardForm.plannerMr || "")}
-                  onChange={(e) => setCardForm(prev => ({
-                    ...prev,
-                    [isEn ? "plannerEn" : "plannerMr"]: e.target.value
-                  }))}
+                  onChange={(e) => updateCardField(isEn ? "plannerEn" : "plannerMr", e.target.value)}
                   placeholder={
                     isEn 
                       ? "e.g. MHADA Towers Utsav Mandal & Central Society Committee" 
@@ -1048,14 +1098,11 @@ const AartiScheduleManager = ({
                   label={isEn ? "Planner Details / Coordinating Wings:" : "नियोजन तपशील / सहभागी विंग्स व समन्वय पथक:"}
                   icon={Building2}
                   value={isEn ? (cardForm.plannerDetailsEn || "") : (cardForm.plannerDetailsMr || "")}
-                  onChange={(e) => setCardForm(prev => ({
-                    ...prev,
-                    [isEn ? "plannerDetailsEn" : "plannerDetailsMr"]: e.target.value
-                  }))}
+                  onChange={(e) => updateCardField(isEn ? "plannerDetailsEn" : "plannerDetailsMr", e.target.value)}
                   placeholder={
                     isEn 
-                      ? "e.g. All 4 Building Wing Leads, Women's Wing & Volunteer Squad (Wings G, H, J, K)" 
-                      : "उदा. सर्व ४ इमारतींचे विंग प्रमुख, महिला मंडळ व स्वयंसेवक दल (विंग G, H, J, K)"
+                      ? "e.g. All 5 Building Wing Leads, Women's Wing & Volunteer Squad (Wings G, H, I, J, K)" 
+                      : "उदा. सर्व ५ इमारतींचे विंग प्रमुख, महिला मंडळ व स्वयंसेवक दल (विंग G, H, I, J, K)"
                   }
                 />
               </div>
@@ -1588,6 +1635,26 @@ const AartiScheduleManager = ({
                       </div>
                     </div>
 
+                    {/* Cultural Program / Activities */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs mt-3">
+                      <div>
+                        <FestiveInput
+                          label={isEn ? "Cultural Program (Marathi):" : "सांस्कृतिक कार्यक्रम (मराठी):"}
+                          value={dayItem.cultural || ""}
+                          onChange={(e) => handleDayFieldChange(dIdx, "cultural", e.target.value)}
+                          placeholder="उदा. गरबा / दांडिया वेशभूषेसह - सायंकाळी ७.०० वाजता 💃🕺"
+                        />
+                      </div>
+                      <div>
+                        <FestiveInput
+                          label={isEn ? "Cultural Program (English):" : "सांस्कृतिक कार्यक्रम (इंग्रजी):"}
+                          value={dayItem.culturalEn || ""}
+                          onChange={(e) => handleDayFieldChange(dIdx, "culturalEn", e.target.value)}
+                          placeholder="e.g. Garba / Dandiya with Traditional Attire - 07:00 PM 💃🕺"
+                        />
+                      </div>
+                    </div>
+
                     {/* EVENTS / AARTI SCHEDULE FOR THIS DAY */}
                     <div className="mt-3 pt-3 border-t border-gold-200/80 space-y-3">
                       <div className="flex items-center justify-between">
@@ -1800,7 +1867,7 @@ const AartiScheduleManager = ({
                                       label={isEn ? "Host Building (Marathi):" : "यजमान इमारत (मराठी):"}
                                       value={evt.hostWing || ""}
                                       onChange={(e) => handleEventFieldChange(dIdx, eIdx, "hostWing", e.target.value)}
-                                      placeholder="उदा. सर्व इमारती संयुक्त (G, H, J, K)"
+                                      placeholder="उदा. सर्व इमारती संयुक्त (G, H, I, J, K)"
                                     />
                                   </div>
 

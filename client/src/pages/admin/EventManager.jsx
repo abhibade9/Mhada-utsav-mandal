@@ -82,10 +82,10 @@ const DEFAULT_FORM_STATE = {
   dayNumber: 1,
   venue: "मुख्य मंडप, म्हाडा टॉवर्स",
   venueEn: "Main Pandal, MHADA Towers",
-  hostWing: "सर्व विंग्ज (G, H, J, K)",
-  hostWingEn: "All Wings (G, H, J, K)",
-  targetAudience: "सर्व विंग्ज (G, H, J, K)",
-  targetAudienceEn: "All Wings (G, H, J, K)",
+  hostWing: "सर्व विंग्ज (G, H, I, J, K)",
+  hostWingEn: "All Wings (G, H, I, J, K)",
+  targetAudience: "सर्व विंग्ज (G, H, I, J, K)",
+  targetAudienceEn: "All Wings (G, H, I, J, K)",
   descriptionMr: "",
   descriptionEn: "",
   status: "upcoming",
@@ -122,10 +122,10 @@ const EventManager = ({ events, onRefresh, onNotify, config }) => {
       dayNumber: ev.dayNumber || 1,
       venue: ev.venue || "मुख्य मंडप, म्हाडा टॉवर्स",
       venueEn: ev.venueEn || "Main Pandal, MHADA Towers",
-      hostWing: ev.hostWing || ev.targetAudience || "सर्व विंग्ज (G, H, J, K)",
-      hostWingEn: ev.hostWingEn || ev.targetAudienceEn || "All Wings (G, H, J, K)",
-      targetAudience: ev.targetAudience || ev.hostWing || "सर्व विंग्ज (G, H, J, K)",
-      targetAudienceEn: ev.targetAudienceEn || ev.hostWingEn || "All Wings (G, H, J, K)",
+      hostWing: ev.hostWing || ev.targetAudience || "सर्व विंग्ज (G, H, I, J, K)",
+      hostWingEn: ev.hostWingEn || ev.targetAudienceEn || "All Wings (G, H, I, J, K)",
+      targetAudience: ev.targetAudience || ev.hostWing || "सर्व विंग्ज (G, H, I, J, K)",
+      targetAudienceEn: ev.targetAudienceEn || ev.hostWingEn || "All Wings (G, H, I, J, K)",
       descriptionMr: ev.descriptionMr || "",
       descriptionEn: ev.descriptionEn || "",
       status: ev.status || "upcoming",
@@ -592,14 +592,14 @@ const EventManager = ({ events, onRefresh, onNotify, config }) => {
               icon={Building2}
               value={form.hostWing}
               onChange={(e) => setForm({ ...form, hostWing: e.target.value, targetAudience: e.target.value })}
-              placeholder="उदा. सर्व विंग्ज (G, H, J, K) / महिला मंडळ / लहान मुले"
+              placeholder="उदा. सर्व विंग्ज (G, H, I, J, K) / महिला मंडळ / लहान मुले"
             />
             <FestiveInput
               label={isEn ? "Target Audience / Host Wing (English)" : "Target Audience / Host Wing (English)"}
               icon={Globe}
               value={form.hostWingEn}
               onChange={(e) => setForm({ ...form, hostWingEn: e.target.value, targetAudienceEn: e.target.value })}
-              placeholder="e.g. All Wings (G, H, J, K) / Kids / Women"
+              placeholder="e.g. All Wings (G, H, I, J, K) / Kids / Women"
             />
           </div>
 

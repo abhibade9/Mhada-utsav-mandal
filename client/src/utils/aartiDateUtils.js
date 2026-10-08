@@ -344,8 +344,109 @@ export const calculateAartiCountdown = ({
 
 // Convert western digits to Marathi numerals
 export const toMarathiNumeral = (num) => {
+  if (num === undefined || num === null) return "";
   const marathiDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
-  return String(num).split("").map((c) => marathiDigits[Number(c)] !== undefined ? marathiDigits[Number(c)] : c).join("");
+  return String(num).replace(/[0-9]/g, (digit) => marathiDigits[Number(digit)]);
+};
+
+// Helper to format any English or 24h time string into clean Marathi display
+export const formatTimeToMarathi = (timeStr) => {
+  if (!timeStr || typeof timeStr !== "string") return timeStr || "";
+  const trimmed = timeStr.trim();
+  if (!trimmed) return "";
+
+  // Handle composite timings (e.g. "09:00 AM & 07:30 PM")
+  if (trimmed.includes("&") || trimmed.toLowerCase().includes(" and ")) {
+    const parts = trimmed.split(/&|\band\b/i);
+    return parts.map(p => formatTimeToMarathi(p.trim())).filter(Boolean).join(" व ");
+  }
+
+  const t24 = parseTimeTo24h(trimmed);
+  if (!t24 || !t24.includes(":")) return toMarathiNumeral(trimmed);
+
+  const [hStr, mStr] = t24.split(":");
+  const h = parseInt(hStr, 10);
+  const m = parseInt(mStr, 10);
+
+  const isPM = h >= 12;
+  const h12 = h % 12 || 12;
+  const period = isPM ? (h >= 17 ? "रात्री" : "दुपारी") : (h < 12 ? "सकाळी" : "दुपारी");
+
+  const hMr = toMarathiNumeral(String(h12).padStart(2, "0"));
+  const mMr = toMarathiNumeral(String(m).padStart(2, "0"));
+
+  return `${period} ${hMr}:${mMr}`;
+};
+
+// Helper to format event duration in Marathi e.g. "10 day event" -> "१० दिवसीय सोहळा"
+export const formatEventDurationToMarathi = (durationStr, totalDays = 10) => {
+  if (!durationStr || typeof durationStr !== "string") {
+    return `${toMarathiNumeral(totalDays)} दिवसीय सोहळा`;
+  }
+  const match = durationStr.match(/(\d+)/);
+  if (match) {
+    const num = match[1];
+    return `${toMarathiNumeral(num)} दिवसीय सोहळा`;
+  }
+  return toMarathiNumeral(durationStr);
+};
+
+// Helper to format ritual descriptions in Marathi e.g. "Pooja & Maha Aarti" -> "पूजा व महाआरती"
+export const formatRitualToMarathi = (descStr) => {
+  if (!descStr || typeof descStr !== "string") return descStr || "";
+  const trimmed = descStr.trim();
+  if (/[\u0900-\u097F]/.test(trimmed)) return trimmed;
+
+  const lower = trimmed.toLowerCase();
+  if (lower === "pooja & maha aarti" || lower === "pooja and maha aarti" || lower === "morning pooja & aarti") {
+    return "पूजा व महाआरती";
+  }
+  if (lower === "dhupaarti & maha aarti" || lower === "dhupaarti and maha aarti") {
+    return "धूप आरती व महाआरती";
+  }
+  if (lower === "murti pranpratishtha pooja & maha aarti") {
+    return "मूर्ती प्राणप्रतिष्ठा पूजा व महाआरती";
+  }
+  return trimmed;
+};
+
+// Helper to format festival day label in Marathi e.g. "Day 1 (Navaratri Utsav - 11 Oct)" -> "दिवस १ (नवरात्री उत्सव - ११ ऑक्टोबर)"
+export const formatFestivalLabelToMarathi = (labelStr, fallbackFestivalName = "नवरात्री उत्सव") => {
+  if (!labelStr || typeof labelStr !== "string") return labelStr || "";
+  const trimmed = labelStr.trim();
+  const dayMatch = trimmed.match(/^day\s*(\d+)\s*\((.*?)\)$/i);
+  if (dayMatch) {
+    const dayNumMr = toMarathiNumeral(dayMatch[1]);
+    const inner = dayMatch[2];
+    const innerParts = inner.split("-");
+    const namePart = innerParts[0]?.trim() || fallbackFestivalName;
+    const datePart = innerParts[1]?.trim() || "";
+
+    let festMr = fallbackFestivalName;
+    if (/nav[a]?ratri/i.test(namePart)) festMr = "नवरात्री उत्सव";
+    else if (/gan[e]?sh|ganpati/i.test(namePart)) festMr = "गणेश उत्सव";
+    else if (/[\u0900-\u097F]/.test(namePart)) festMr = namePart;
+
+    let dateMr = datePart;
+    const dateMatch = datePart.match(/(\d+)\s*([a-zA-Z]+)/);
+    if (dateMatch) {
+      const dNum = toMarathiNumeral(dateMatch[1]);
+      const monthStr = dateMatch[2].toLowerCase();
+      const monthMap = {
+        jan: "जानेवारी", feb: "फेब्रुवारी", mar: "मार्च", apr: "एप्रिल",
+        may: "मे", jun: "जून", jul: "जुलै", aug: "ऑगस्ट",
+        sep: "सप्टेंबर", oct: "ऑक्टोबर", nov: "नोव्हेंबर", dec: "डिसेंबर"
+      };
+      const foundMonth = Object.keys(monthMap).find(k => monthStr.startsWith(k));
+      const mName = foundMonth ? monthMap[foundMonth] : dateMatch[2];
+      dateMr = `${dNum} ${mName}`;
+    } else if (datePart) {
+      dateMr = toMarathiNumeral(datePart);
+    }
+
+    return dateMr ? `दिवस ${dayNumMr} (${festMr} - ${dateMr})` : `दिवस ${dayNumMr} (${festMr})`;
+  }
+  return toMarathiNumeral(trimmed);
 };
 
 // Helper to format "YYYY-MM-DD" string into readable English or Marathi date

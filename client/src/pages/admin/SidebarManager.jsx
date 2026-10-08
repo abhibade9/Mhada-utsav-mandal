@@ -70,8 +70,8 @@ const SidebarManager = ({ config, onSaveSidebar, onNotify }) => {
       sidebarMenu: items,
       sidebarSettings: {
         showFloatingTrigger,
-        bottomCardTitle: "All 4 Wings",
-        bottomCardSubtitle: "Wings G, H, J, K",
+        bottomCardTitle: "All 5 Wings",
+        bottomCardSubtitle: "Wings G, H, I, J, K",
         bottomCardTagline,
         bottomCardSubtag
       }

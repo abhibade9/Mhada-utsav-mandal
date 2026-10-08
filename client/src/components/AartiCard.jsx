@@ -227,8 +227,8 @@ const AartiCard = () => {
     : (sectionConfig.titleEn || "Daily Maha Aarti & Host Wings");
 
   const sectionSubtitle = language === "mr"
-    ? (sectionConfig.subtitleMr || "दररोज सकाळी ०८:३० व रात्री ०८:०० वाजता मुख्य मंडपात महाआरती")
-    : (sectionConfig.subtitleEn || "Every day at 08:30 AM and 07:30 PM near G wing");
+    ? (sectionConfig.subtitleMr || "")
+    : (sectionConfig.subtitleEn || "");
 
   const countdownLabel = language === "mr"
     ? (sectionConfig.countdownLabelMr || t("nextAartiCountdown"))
@@ -280,9 +280,11 @@ const AartiCard = () => {
             <h2 className="text-2xl sm:text-3xl font-black text-maroon-950 font-heading mt-1.5">
               {sectionTitle}
             </h2>
-            <p className="text-xs sm:text-sm text-maroon-800 font-medium">
-              {sectionSubtitle}
-            </p>
+            {sectionSubtitle ? (
+              <p className="text-xs sm:text-sm text-maroon-800 font-medium">
+                {sectionSubtitle}
+              </p>
+            ) : null}
           </div>
         </div>
 

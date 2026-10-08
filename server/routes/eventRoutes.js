@@ -97,8 +97,8 @@ const normalizeEventPayload = (body) => {
   const startDateTime = parseISTDateTime(startDate, startTime, "08:30");
   const endDateTime = parseISTDateTime(endDate || startDate, endTime || startTime, "21:00");
 
-  const hostWing = (body.hostWing || body.targetAudience || "सर्व विंग्ज (G, H, J, K)").trim();
-  const hostWingEn = (body.hostWingEn || body.targetAudienceEn || "All Wings (G, H, J, K)").trim();
+  const hostWing = (body.hostWing || body.targetAudience || "सर्व विंग्ज (G, H, I, J, K)").trim();
+  const hostWingEn = (body.hostWingEn || body.targetAudienceEn || "All Wings (G, H, I, J, K)").trim();
 
   return {
     category: body.category || "cultural",

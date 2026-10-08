@@ -161,19 +161,16 @@ export const seedInitialData = async () => {
         existingConfig.set("festivalScheduleCard", localCard || {
           eventNameMr: "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य उत्सव)",
           eventNameEn: "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
-          eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
-          eventDescriptionEn: "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers.",
+          eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G, H, I, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
+          eventDescriptionEn: "10-day grand festival celebration organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers.",
           plannerMr: "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
           plannerEn: "MHADA Towers Utsav Mandal & Central Society Committee",
-          plannerDetailsMr: "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)",
-          plannerDetailsEn: "All 4 Building Wing Leads & Volunteer Squad (Wings G, H, J, K)",
+          plannerDetailsMr: "सर्व ५ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, I, J, K)",
+          plannerDetailsEn: "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)",
           imageUrl: localCard?.imageUrl || "/uploads/WhatsApp_Image_2026-09-15_at_22_28_01-1789491506299-483063137.jpeg",
           imageCaptionMr: "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा",
           imageCaptionEn: "Festival Schedule & Complete Event Blueprint"
         });
-        needsSave = true;
-      } else if (!existingConfig.festivalScheduleCard.imageUrl && localCard?.imageUrl) {
-        existingConfig.festivalScheduleCard.imageUrl = localCard.imageUrl;
         needsSave = true;
       }
 
@@ -201,8 +198,8 @@ export const seedInitialData = async () => {
           dayNumber: 1,
           venue: "म्हाडा टॉवर्स मुख्य प्रवेशद्वार ते मध्यवर्ती मंडप",
           venueEn: "Main Entrance to Central Pandal",
-          hostWing: "सर्व ४ विंग्ज (G, H, J, K)",
-          hostWingEn: "All 4 Wings (G, H, J, K)",
+          hostWing: "सर्व ५ विंग्ज (G, H, I, J, K)",
+          hostWingEn: "All 5 Wings (G, H, I, J, K)",
           descriptionMr: "ढोल-ताशांच्या गजरात व लेझीम पथकासह बाप्पांचे आगमन. मुख्य प्रवेशद्वारावर सुवासिनींकडून औक्षण व त्यानंतर विधिवत प्राणप्रतिष्ठा पूजा.",
           descriptionEn: "Arrival procession with traditional Dhol-Tasha and Pranpratishtha pooja at the central festive pandal.",
           isHighlight: true,
@@ -321,8 +318,8 @@ export const seedInitialData = async () => {
           dayNumber: 9,
           venue: "मुख्य उत्सव व्यासपीठ",
           venueEn: "Main Festive Stage",
-          hostWing: "G, H, J, K विंग्ज समिती",
-          hostWingEn: "G, H, J, K Wings Committee",
+          hostWing: "G, H, I, J, K विंग्ज समिती",
+          hostWingEn: "G, H, I, J, K Wings Committee",
           descriptionMr: "१०वी, १२वी, पदवी व क्रीडा क्षेत्रात उल्लेखनीय यश मिळवलेल्या म्हाडा टॉवर्समधील विद्यार्थ्यांचा विशेष सन्मानचिन्ह देऊन गौरव.",
           descriptionEn: "Honoring 10th, 12th, degree and sports achievers from MHADA Towers with mementos.",
           isHighlight: true,

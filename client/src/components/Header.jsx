@@ -185,17 +185,6 @@ const Header = ({
                     ? (language === "mr" ? `नोंदणी क्र: ${config.regNo}` : `Reg No: ${config.regNo}`) 
                     : (language === "mr" ? "नोंदणी क्र: १२४३/२०२५ - पुणे" : "Reg No: 1243/2025 - Pune")}
                 </span>
-
-                {config?.festivalStatus && (
-                  <span className="inline-flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-black tracking-wide text-emerald-300 bg-emerald-950/90 px-2 sm:px-2.5 py-0.5 rounded-full border border-emerald-500/50 shadow-xs truncate animate-pulse">
-                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 flex-shrink-0" />
-                    <span className="truncate">
-                      {language === "mr" 
-                        ? config.festivalStatus 
-                        : (config.festivalStatus.includes("Live") ? config.festivalStatus : "Festival Live")}
-                    </span>
-                  </span>
-                )}
               </div>
 
               <h1 className="text-xs xs:text-sm sm:text-xl md:text-2xl font-black text-gold-300 tracking-tight leading-snug drop-shadow-sm font-heading truncate">

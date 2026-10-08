@@ -8,6 +8,7 @@
 export const DEFAULT_WINGS = [
   { code: "G", nameMr: "G विंग - नंदादेवी", nameEn: "G Wing - Nandadevi", sacredNameMr: "नंदादेवी", sacredNameEn: "Nandadevi" },
   { code: "H", nameMr: "H विंग - निलगिरी", nameEn: "H Wing - Nilgiri", sacredNameMr: "निलगिरी", sacredNameEn: "Nilgiri" },
+  { code: "I", nameMr: "I विंग - ब्रह्मगिरी", nameEn: "I Wing - Brahmagiri", sacredNameMr: "ब्रह्मगिरी", sacredNameEn: "Brahmagiri" },
   { code: "J", nameMr: "J विंग - पूर्वांचल", nameEn: "J Wing - Purvanchal", sacredNameMr: "पूर्वांचल", sacredNameEn: "Purvanchal" },
   { code: "K", nameMr: "K विंग - गोवर्धन", nameEn: "K Wing - Govardhan", sacredNameMr: "गोवर्धन", sacredNameEn: "Govardhan" }
 ];

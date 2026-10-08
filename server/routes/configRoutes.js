@@ -453,7 +453,7 @@ router.put("/sidebar", protectAdmin, async (req, res) => {
 // Admin updates Festival Schedule Card (Event Details, Planner & Photo)
 router.put("/festival-schedule-card", protectAdmin, async (req, res) => {
   try {
-    const { festivalScheduleCard } = req.body;
+    const festivalScheduleCard = req.body.festivalScheduleCard || (req.body && (req.body.eventNameMr || req.body.imageUrl !== undefined) ? req.body : null);
 
     if (isDatabaseConnected()) {
       try {

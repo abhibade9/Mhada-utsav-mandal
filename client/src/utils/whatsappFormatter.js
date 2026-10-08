@@ -97,7 +97,7 @@ const getMandalHeader = (config) => {
 };
 
 const getMandalFooter = () => {
-  return `━━━━━━━━━━━━━━━━━━━━━━\n🏢 *सहभागी ४ इमारती:* G (नंदादेवी) • H (निलगिरी) • J (पूर्वांचल) • K (गोवर्धन)\n🙏 *गणपती बाप्पा मोरया, मंगलमूर्ती मोरया!* 🌸`;
+  return `━━━━━━━━━━━━━━━━━━━━━━\n🏢 *सहभागी ५ इमारती:* G (नंदादेवी) • H (निलगिरी) • I (ब्रह्मगिरी) • J (पूर्वांचल) • K (गोवर्धन)\n🙏 *गणपती बाप्पा मोरया, मंगलमूर्ती मोरया!* 🌸`;
 };
 
 // 1. Daily Newsletter Broadcast Formatter (Fully dynamic with blocks and days)
@@ -153,7 +153,7 @@ export const formatNewsletterBroadcast = (newsletter, config, specificDay = null
     contentSections = renderedBlocks.join("\n\n");
   } else {
     // Fallback to legacy fields
-    const hostWing = activeDay.hostWing || nl.todaysHostWing || "सर्व ४ विंग्ज (G, H, J, K)";
+    const hostWing = activeDay.hostWing || nl.todaysHostWing || "सर्व ५ विंग्ज (G, H, I, J, K)";
     const hostLead = activeDay.hostLead || nl.hostLead || "";
     const morningTime = activeDay.morningTime || "सकाळी ०८:३०";
     const morningRitual = activeDay.morningRitual || activeDay.ritual || "महापूजा";
@@ -251,7 +251,7 @@ export const formatSingleAartiDay = (dayItem, config) => {
 
 🏢 *यजमान इमारत:* ${host}${lead}
 ${ritual ? `🌸 *धार्मिक विधी:* ${ritual}\n` : ""}${cultural ? `🎭 *सांस्कृतिक कार्यक्रम:* ${cultural}\n` : ""}${prasad ? `🍬 *महाप्रसाद:* ${prasad}\n` : ""}
-सर्व इमारतींच्या (G, H, J, K) रहिवाशांनी सपरिवार उपस्थित राहून बाप्पांच्या आरतीचा लाभ घ्यावा.
+सर्व इमारतींच्या (G, H, I, J, K) रहिवाशांनी सपरिवार उपस्थित राहून बाप्पांच्या आरतीचा लाभ घ्यावा.
 
 ${getMandalFooter()}`
   ).trim();
@@ -286,7 +286,7 @@ ${getMandalFooter()}`
 export const formatSingleAnnouncement = (ann, config) => {
   if (!ann) return "";
   const priorityBadge = ann.priority === "high" ? "🚨 *अत्यंत महत्त्वाची सूचना (URGENT)*" : "📢 *मंडळ सूचना*";
-  const wings = Array.isArray(ann.targetWings) ? ann.targetWings.join(", ") : "सर्व विंग्ज (G, H, J, K)";
+  const wings = Array.isArray(ann.targetWings) ? ann.targetWings.join(", ") : "सर्व विंग्ज (G, H, I, J, K)";
 
   return (
 `${getMandalHeader(config)}
@@ -343,7 +343,7 @@ export const formatSingleEvent = (ev, config) => {
 📅 *तारीख:* ${ev.dateStr || ""}
 ⏰ *वेळ:* ${ev.time || ""}
 📍 *स्थळ:* ${ev.venue || "मुख्य उत्सव मंडप"}
-🏢 *आयोजक/यजमान:* ${ev.hostWing || "सर्व विंग्ज (G, H, J, K)"}
+🏢 *आयोजक/यजमान:* ${ev.hostWing || "सर्व विंग्ज (G, H, I, J, K)"}
 
 ${ev.descriptionMr ? `📝 *तपशील:*\n${ev.descriptionMr}\n` : ""}
 सर्व इमारतींच्या रहिवाशांनी उपस्थित राहावे!
@@ -368,7 +368,7 @@ export const formatSocietyRulesBroadcast = (rulesList, config) => {
 `${getMandalHeader(config)}
 📜 *म्हाडा टॉवर्स गणेशोत्सव - मंडळ व सोसायटी नियमावली*
 ━━━━━━━━━━━━━━━━━━━━━━
-उत्सवादरम्यान सर्व ४ इमारतींमधील (G, H, J, K) रहिवाशांच्या सुरक्षिततेसाठी व शांततेसाठी खालील नियमांचे काटेकोर पालन करावे:
+उत्सवादरम्यान सर्व ५ इमारतींमधील (G, H, I, J, K) रहिवाशांच्या सुरक्षिततेसाठी व शांततेसाठी खालील नियमांचे काटेकोर पालन करावे:
 
 ${rulesText || "सोसायटी नियमावली लवकरच उपलब्ध होईल."}
 

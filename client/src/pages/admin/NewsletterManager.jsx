@@ -14,7 +14,12 @@ import {
   getKolkataDate, 
   calculateFestivalDay, 
   diffInDays, 
-  formatKolkataDateString 
+  formatKolkataDateString,
+  toMarathiNumeral,
+  formatTimeToMarathi,
+  formatEventDurationToMarathi,
+  formatRitualToMarathi,
+  formatFestivalLabelToMarathi
 } from "../../utils/aartiDateUtils";
 
 const CATEGORY_OPTIONS = [
@@ -229,6 +234,10 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
         ? nl.enabled 
         : (config?.tabs?.newsletter?.enabled !== false);
 
+      const isEnglishHeadline = nl.headline && !(/[\u0900-\u097F]/.test(nl.headline));
+      const resolvedHeadlineEn = nl.headlineEn || (isEnglishHeadline ? nl.headline : "") || loadedDays[0]?.headline || "Navratri Festival Live";
+      const resolvedHeadlineMr = nl.headlineMr || (!isEnglishHeadline ? nl.headline : "") || loadedDays[0]?.headlineMr || "नवरात्री उत्सव थेट (लाइव्ह)";
+
       setForm({
         enabled,
         startDate: nl.startDate || "2026-09-07",
@@ -241,13 +250,13 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
         bulletinTitleMr: nl.bulletinTitleMr || "दैनिक डिजिटल वृत्तपत्र",
         eventDuration: nl.eventDuration || "1 day event",
         eventDurationMr: nl.eventDurationMr || "१ दिवसीय सोहळा",
-        festivalName: nl.festivalName || "Ganesh Utsav - 16 Sep",
-        festivalNameMr: nl.festivalNameMr || "गणेश उत्सव - १६ सप्टेंबर",
-        headline: nl.headline || "Ganpati Festival Live",
-        headlineMr: nl.headlineMr || "गणपती उत्सव थेट (लाइव्ह)",
-        subtitle: nl.subtitle || "All 5 wings are participated",
-        subtitleMr: nl.subtitleMr || "सर्व ५ इमारतींचा संयुक्त सहभाग",
-        safetyTip: nl.safetyTip || "Please park vehicles only in designated spots.",
+        festivalName: nl.festivalName || "Navratri Utsav",
+        festivalNameMr: nl.festivalNameMr || "नवरात्री उत्सव",
+        headline: resolvedHeadlineEn,
+        headlineMr: resolvedHeadlineMr,
+        subtitle: nl.subtitle || nl.subtitleEn || loadedDays[0]?.subtitle || "All 5 wings are participated",
+        subtitleMr: nl.subtitleMr || loadedDays[0]?.subtitleMr || "सर्व ५ इमारतींचा संयुक्त सहभाग",
+        safetyTip: nl.safetyTip || nl.safetyTipEn || "Please park vehicles only in designated spots.",
         safetyTipMr: nl.safetyTipMr || "कृपया वाहने नियुक्त पार्किंगमध्येच लावावीत.",
         days: loadedDays
       });
@@ -311,15 +320,22 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
 
   const handleSaveDayModal = (e) => {
     if (e) e.preventDefault();
+    const targetDayForm = {
+      ...dayForm,
+      festivalDayLabelMr: (dayForm.festivalDayLabelMr && !dayForm.festivalDayLabelMr.includes("१७ सप्टेंबर"))
+        ? dayForm.festivalDayLabelMr
+        : formatFestivalLabelToMarathi(dayForm.festivalDayLabel, form.festivalNameMr || "नवरात्री उत्सव")
+    };
+
     if (editingDayIndex !== null) {
       // Edit existing day
       const updatedDays = [...form.days];
       updatedDays[editingDayIndex] = {
         ...updatedDays[editingDayIndex],
-        ...dayForm
+        ...targetDayForm
       };
       // If marked current day, reset others
-      if (dayForm.isCurrentDay) {
+      if (targetDayForm.isCurrentDay) {
         updatedDays.forEach((d, i) => {
           if (i !== editingDayIndex) d.isCurrentDay = false;
         });
@@ -329,8 +345,8 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
     } else {
       // Add new day
       const newDay = {
-        ...dayForm,
-        id: dayForm.id || `day_${Date.now()}`,
+        ...targetDayForm,
+        id: targetDayForm.id || `day_${Date.now()}`,
         blocks: createDefaultBlocks()
       };
       const updatedDays = [...form.days, newDay];
@@ -531,7 +547,21 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
 
   const handleUpdateAartiRow = (itmIdx, field, val) => {
     const updated = [...(blockForm.items || [])];
-    updated[itmIdx] = { ...updated[itmIdx], [field]: val };
+    const currentRow = { ...updated[itmIdx], [field]: val };
+
+    if (field === "time") {
+      currentRow.timeMr = formatTimeToMarathi(val);
+    } else if (field === "desc") {
+      currentRow.descMr = formatRitualToMarathi(val);
+    } else if (field === "label") {
+      if (val.toLowerCase().includes("morning")) {
+        currentRow.labelMr = "सकाळची महाआरती:";
+      } else if (val.toLowerCase().includes("evening")) {
+        currentRow.labelMr = "संध्याकाळची महाआरती:";
+      }
+    }
+
+    updated[itmIdx] = currentRow;
     setBlockForm(prev => ({ ...prev, items: updated }));
   };
 
@@ -554,8 +584,76 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
 
     setIsSaving(true);
 
+    // Sanitize and sync days so primary days don't hold obsolete default headlines or stale timings
+    const sanitizedDays = (form.days || []).map((d) => {
+      let dHl = d.headline;
+      if (!dHl || dHl === "Ganpati Festival Live") {
+        dHl = form.headline || "Navratri Festival Live";
+      }
+      let dHlMr = d.headlineMr;
+      if (!dHlMr || dHlMr === "गणपती उत्सव थेट (लाइव्ह)") {
+        dHlMr = form.headlineMr || "नवरात्री उत्सव थेट (लाइव्ह)";
+      }
+
+      const festLabel = d.festivalDayLabel || form.festivalName || "Day 1 (Navaratri Utsav)";
+      const festLabelMr = (d.festivalDayLabelMr && !d.festivalDayLabelMr.includes("१७ सप्टेंबर"))
+        ? d.festivalDayLabelMr
+        : formatFestivalLabelToMarathi(festLabel, form.festivalNameMr || "नवरात्री उत्सव");
+
+      // Sanitize blocks inside day
+      const sanitizedBlocks = (d.blocks || []).map((blk) => {
+        const blkTime = blk.time || "";
+        const blkTimeMr = (blk.timeMr && !blk.timeMr.includes("०८:३०"))
+          ? blk.timeMr
+          : formatTimeToMarathi(blkTime);
+
+        const sanitizedItems = (blk.items || []).map((it) => {
+          const itTime = it.time || "";
+          const itTimeMr = (it.timeMr && !it.timeMr.includes("०८:३०"))
+            ? it.timeMr
+            : formatTimeToMarathi(itTime);
+
+          const itDesc = it.desc || "";
+          const itDescMr = (it.descMr && !it.descMr.includes("श्रींची विधिवत") && !it.descMr.includes("सामूहिक अथर्वशीर्ष"))
+            ? it.descMr
+            : formatRitualToMarathi(itDesc);
+
+          return {
+            ...it,
+            time: itTime,
+            timeMr: itTimeMr,
+            desc: itDesc,
+            descMr: itDescMr
+          };
+        });
+
+        return {
+          ...blk,
+          time: blkTime,
+          timeMr: blkTimeMr,
+          items: sanitizedItems
+        };
+      });
+
+      return {
+        ...d,
+        headline: dHl,
+        headlineMr: dHlMr,
+        subtitle: d.subtitle || form.subtitle || "All 5 wings are participated",
+        subtitleMr: d.subtitleMr || form.subtitleMr || "सर्व ५ इमारतींचा संयुक्त सहभाग",
+        festivalDayLabel: festLabel,
+        festivalDayLabelMr: festLabelMr,
+        blocks: sanitizedBlocks
+      };
+    });
+
     const payload = {
       ...form,
+      eventDuration: form.eventDuration,
+      eventDurationMr: (form.eventDurationMr && !form.eventDurationMr.includes("१ दिवसीय"))
+        ? form.eventDurationMr
+        : formatEventDurationToMarathi(form.eventDuration),
+      days: sanitizedDays,
       startDate: form.startDate,
       endDate: form.endDate,
       showSelectDay: form.showSelectDay !== false,
@@ -564,12 +662,15 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
       // Backward-compatible mirror fields
       edition: form.bulletinTitleMr || form.bulletinTitle,
       editionEn: form.eventDuration,
-      headline: form.headlineMr || form.headline,
+      headline: form.headline || form.headlineMr,
       headlineEn: form.headline,
-      subheadline: form.subtitleMr || form.subtitle,
+      headlineMr: form.headlineMr,
+      subheadline: form.subtitle || form.subtitleMr,
       subheadlineEn: form.subtitle,
-      safetyTip: form.safetyTipMr || form.safetyTip,
-      safetyTipEn: form.safetyTip
+      subheadlineMr: form.subtitleMr,
+      safetyTip: form.safetyTip || form.safetyTipMr,
+      safetyTipEn: form.safetyTip,
+      safetyTipMr: form.safetyTipMr
     };
 
     const res = await onSaveNewsletter(payload);
@@ -870,7 +971,14 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
             <FestiveInput
               label={isEn ? "Event Duration Badge" : "उत्सव कालावधी बॅज"}
               value={form.eventDuration}
-              onChange={(e) => setForm({ ...form, eventDuration: e.target.value })}
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm(prev => ({
+                  ...prev,
+                  eventDuration: val,
+                  eventDurationMr: formatEventDurationToMarathi(val)
+                }));
+              }}
               placeholder="e.g. 1 day event / 10-day event"
             />
             <FestiveInput
@@ -885,15 +993,37 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
             <FestiveInput
               label={isEn ? "Main Headline (English) *" : "मुख्य बातमी मथळा (इंग्रजी) *"}
               value={form.headline}
-              onChange={(e) => setForm({ ...form, headline: e.target.value })}
-              placeholder="e.g. Ganpati Festival Live"
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm(prev => {
+                  const updatedDays = (prev.days || []).map((d, i) => {
+                    if (i === selectedDayIdx || !d.headline || d.headline === prev.headline || d.headline === "Ganpati Festival Live") {
+                      return { ...d, headline: val };
+                    }
+                    return d;
+                  });
+                  return { ...prev, headline: val, days: updatedDays };
+                });
+              }}
+              placeholder="e.g. Navratri Festival Live"
               required
             />
             <FestiveInput
               label={isEn ? "Main Headline (Marathi)" : "मुख्य बातमी मथळा (मराठी)"}
               value={form.headlineMr}
-              onChange={(e) => setForm({ ...form, headlineMr: e.target.value })}
-              placeholder="उदा. गणपती उत्सव थेट (लाइव्ह)"
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm(prev => {
+                  const updatedDays = (prev.days || []).map((d, i) => {
+                    if (i === selectedDayIdx || !d.headlineMr || d.headlineMr === prev.headlineMr || d.headlineMr === "गणपती उत्सव थेट (लाइव्ह)") {
+                      return { ...d, headlineMr: val };
+                    }
+                    return d;
+                  });
+                  return { ...prev, headlineMr: val, days: updatedDays };
+                });
+              }}
+              placeholder="उदा. नवरात्री उत्सव थेट (लाइव्ह)"
             />
           </div>
 
@@ -901,13 +1031,35 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
             <FestiveInput
               label={isEn ? "Subtitle / Summary (English)" : "उपशीर्षक / सारांश (इंग्रजी)"}
               value={form.subtitle}
-              onChange={(e) => setForm({ ...form, subtitle: e.target.value })}
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm(prev => {
+                  const updatedDays = (prev.days || []).map((d, i) => {
+                    if (i === selectedDayIdx || !d.subtitle || d.subtitle === prev.subtitle) {
+                      return { ...d, subtitle: val };
+                    }
+                    return d;
+                  });
+                  return { ...prev, subtitle: val, days: updatedDays };
+                });
+              }}
               placeholder="e.g. All 5 wings are participated"
             />
             <FestiveInput
               label={isEn ? "Subtitle / Summary (Marathi)" : "उपशीर्षक / सारांश (मराठी)"}
               value={form.subtitleMr}
-              onChange={(e) => setForm({ ...form, subtitleMr: e.target.value })}
+              onChange={(e) => {
+                const val = e.target.value;
+                setForm(prev => {
+                  const updatedDays = (prev.days || []).map((d, i) => {
+                    if (i === selectedDayIdx || !d.subtitleMr || d.subtitleMr === prev.subtitleMr) {
+                      return { ...d, subtitleMr: val };
+                    }
+                    return d;
+                  });
+                  return { ...prev, subtitleMr: val, days: updatedDays };
+                });
+              }}
               placeholder="उदा. सर्व ५ इमारतींचा संयुक्त सहभाग"
             />
           </div>
@@ -930,133 +1082,14 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
           </div>
         </div>
 
-        {/* SECTION 6: Dynamic Days Management */}
-        <div className="p-4 bg-[#FFFDF9] rounded-2xl border-2 border-gold-300 shadow-xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <span className="text-xs font-black uppercase text-maroon-950 font-heading block">
-                {isEn ? "6. Festival Day Management (Select Day to Edit)" : "६. उत्सव दिवस व्यवस्थापन (माहिती भरण्यासाठी दिवस निवडा)"}
-              </span>
-              <p className="text-[11px] text-stone-500">
-                {isEn 
-                  ? "Manage days, mark Today's Day, add information blocks per day, or add new days."
-                  : "दिवस जोडा, बदला, 'आजचा दिवस' नियुक्त करा व प्रत्येक दिवसाचे माहिती ब्लॉक्स नियंत्रित करा."}
-              </p>
-            </div>
-
-            <FestiveButton
-              type="button"
-              onClick={handleOpenAddDay}
-              icon={Plus}
-              variant="outline"
-              size="sm"
-            >
-              {isEn ? "+ Add New Day" : "+ नवीन दिवस जोडा"}
-            </FestiveButton>
-          </div>
-
-          {/* Day Selector Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 pt-1 border-b border-gold-200 no-scrollbar">
-            {form.days.map((d, idx) => {
-              const isSelected = idx === selectedDayIdx;
-              const isToday = d.isCurrentDay;
-              const dNum = d.dayNumber || (idx + 1);
-
-              return (
-                <div key={d.id || idx} className="flex items-center gap-1 flex-shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDayIdx(idx)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition border flex items-center gap-1.5 cursor-pointer ${
-                      isSelected
-                        ? "bg-maroon-950 text-gold-300 border-gold-500 shadow-sm"
-                        : "bg-amber-50/70 text-maroon-900 hover:bg-gold-100 border-gold-300"
-                    }`}
-                  >
-                    <span>{isEn ? `Day ${dNum}` : `दिवस ${dNum}`}</span>
-                    {isToday && (
-                      <span className="text-[9px] bg-red-600 text-white px-1.5 py-0.2 rounded-full font-black">
-                        {isEn ? "Today" : "आज"}
-                      </span>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Controls for Selected Day */}
-          <div className="bg-amber-50/50 p-3 rounded-xl border border-gold-200 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-extrabold text-maroon-950">
-                {isEn ? `Day ${currentDay.dayNumber || selectedDayIdx + 1}` : `दिवस ${currentDay.dayNumber || selectedDayIdx + 1}`}:
-              </span>
-              <span className="text-stone-700 font-semibold">
-                {currentDay.festivalDayLabel || currentDay.dateStr || "Ganesh Utsav"}
-              </span>
-              {currentDay.isCurrentDay ? (
-                <span className="text-[10px] font-black bg-red-600 text-white px-2 py-0.5 rounded-full flex items-center gap-1">
-                  <Star className="w-2.5 h-2.5 fill-white" />
-                  <span>{isEn ? "Marked as Today's Day" : "आजचा दिवस (Today)"}</span>
-                </span>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => handleSetAsToday(selectedDayIdx)}
-                  className="px-2 py-0.5 rounded-lg bg-gold-400 hover:bg-gold-500 text-maroon-950 font-black text-[10px] transition cursor-pointer shadow-xs"
-                >
-                  {isEn ? "★ Set as Today" : "★ आजचा दिवस करा"}
-                </button>
-              )}
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => handleMoveDay(selectedDayIdx, -1)}
-                disabled={selectedDayIdx === 0}
-                className="p-1 rounded-lg border border-gold-300 hover:bg-gold-100 disabled:opacity-30 cursor-pointer"
-                title="Move Left"
-              >
-                <ArrowUp className="w-3.5 h-3.5 -rotate-90 text-maroon-900" />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleMoveDay(selectedDayIdx, 1)}
-                disabled={selectedDayIdx === form.days.length - 1}
-                className="p-1 rounded-lg border border-gold-300 hover:bg-gold-100 disabled:opacity-30 cursor-pointer"
-                title="Move Right"
-              >
-                <ArrowDown className="w-3.5 h-3.5 -rotate-90 text-maroon-900" />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleOpenEditDay(selectedDayIdx)}
-                className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-gold-100 text-maroon-900 font-bold text-[11px] border border-gold-300 transition cursor-pointer"
-              >
-                {isEn ? "Edit Day Details" : "दिवसाचे तपशील बदला"}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDeleteDay(selectedDayIdx)}
-                disabled={form.days.length <= 1}
-                className="p-1 rounded-lg border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-30 cursor-pointer"
-                title="Delete Day"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* SECTION 7: Information Blocks for Selected Day */}
+        {/* SECTION 6: Information Blocks for Selected Day */}
         <div className="p-4 bg-[#FFFDF9] rounded-2xl border-2 border-gold-300 shadow-xs space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-gold-200">
             <div>
               <span className="text-xs font-black uppercase text-maroon-950 font-heading block">
                 {isEn 
-                  ? `7. Information Blocks for Day ${currentDay.dayNumber || selectedDayIdx + 1}` 
-                  : `७. दिवस ${currentDay.dayNumber || selectedDayIdx + 1} चे माहिती ब्लॉक्स (${currentBlocks.length})`}
+                  ? `6. Information Blocks for Day ${currentDay.dayNumber || selectedDayIdx + 1}` 
+                  : `६. दिवस ${currentDay.dayNumber || selectedDayIdx + 1} चे माहिती ब्लॉक्स (${currentBlocks.length})`}
               </span>
               <p className="text-[11px] text-stone-500">
                 {isEn 
@@ -1244,10 +1277,35 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
           {/* Render preview cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-gold-500/20 text-xs">
             {currentBlocks.filter(b => b.isActive !== false).slice(0, 4).map((blk, idx) => (
-              <div key={idx} className="bg-maroon-900/70 p-2 rounded-lg border border-gold-500/30">
-                <span className="font-extrabold text-gold-300 block text-[11px] uppercase">{blk.title}</span>
-                {blk.time && <span className="text-white font-bold text-[10px]">⏰ {blk.time}</span>}
-                {blk.subtitle && <p className="text-[10px] text-gold-100/90 truncate">{blk.subtitle}</p>}
+              <div key={idx} className="bg-maroon-900/70 p-2.5 rounded-xl border border-gold-500/30 space-y-1">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-gold-300 block text-[11px] uppercase">{blk.title}</span>
+                  {blk.badge && (
+                    <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded-full bg-gold-400/20 text-gold-200 border border-gold-400/40">
+                      {blk.badge}
+                    </span>
+                  )}
+                </div>
+
+                {Array.isArray(blk.items) && blk.items.length > 0 ? (
+                  <div className="space-y-1 pt-0.5">
+                    {blk.items.map((it, itmIdx) => (
+                      <div key={itmIdx} className="text-[10px] text-gold-100">
+                        <div className="flex justify-between font-bold text-gold-200">
+                          <span>{it.label}</span>
+                          <span className="text-white font-black">{it.time}</span>
+                        </div>
+                        {it.desc && <p className="text-gold-200/70 truncate">{it.desc}</p>}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div>
+                    {blk.time && <span className="text-white font-bold text-[10px] block">⏰ {blk.time}</span>}
+                    {blk.subtitle && <p className="text-[10px] text-gold-100/90 truncate">{blk.subtitle}</p>}
+                    {blk.description && <p className="text-[10px] text-gold-200/70 truncate">{blk.description}</p>}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -1351,7 +1409,14 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
                   label={isEn ? "Display Timing" : "वेळ (Timing)"}
                   icon={Clock}
                   value={blockForm.time}
-                  onChange={(e) => setBlockForm({ ...blockForm, time: e.target.value })}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setBlockForm(prev => ({
+                      ...prev,
+                      time: val,
+                      timeMr: formatTimeToMarathi(val)
+                    }));
+                  }}
                   placeholder="e.g. 08:30 AM & 07:30 PM"
                 />
                 <FestiveInput
@@ -1532,7 +1597,14 @@ const NewsletterManager = ({ config, onSaveNewsletter, onNotify }) => {
               <FestiveInput
                 label={isEn ? "Festival / Day Label" : "दिवस लेबल (उदा. Day 3 (Ganesh Utsav - 16 Sep))"}
                 value={dayForm.festivalDayLabel}
-                onChange={(e) => setDayForm({ ...dayForm, festivalDayLabel: e.target.value })}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setDayForm(prev => ({
+                    ...prev,
+                    festivalDayLabel: val,
+                    festivalDayLabelMr: formatFestivalLabelToMarathi(val, form.festivalNameMr || "नवरात्री उत्सव")
+                  }));
+                }}
                 placeholder="e.g. Day 3 (Ganesh Utsav - 16 Sep)"
               />
 

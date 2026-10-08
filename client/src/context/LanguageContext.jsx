@@ -24,9 +24,10 @@ export const translations = {
     allWings: "सर्व इमारती",
     wingG: "G - नंदादेवी (Nandadevi)",
     wingH: "H - निलगिरी (Nilgiri)",
+    wingI: "I - ब्रह्मगिरी (Brahmagiri)",
     wingJ: "J - पूर्वांचल (Purvanchal)",
     wingK: "K - गोवर्धन (Govardhan)",
-    wingsBanner: "सहभागी ४ इमारती: G (नंदादेवी) • H (निलगिरी) • J (पूर्वांचल) • K (गोवर्धन)",
+    wingsBanner: "सहभागी ५ इमारती: G (नंदादेवी) • H (निलगिरी) • I (ब्रह्मगिरी) • J (पूर्वांचल) • K (गोवर्धन)",
 
     // Aarti & Countdown
     aartiTitle: "दैनिक महाआरती व यजमान",
@@ -102,9 +103,10 @@ export const translations = {
     allWings: "All Buildings",
     wingG: "G - Nandadevi",
     wingH: "H - Nilgiri",
+    wingI: "I - Brahmagiri",
     wingJ: "J - Purvanchal",
     wingK: "K - Govardhan",
-    wingsBanner: "4 Participating Buildings: G (Nandadevi) • H (Nilgiri) • J (Purvanchal) • K (Govardhan)",
+    wingsBanner: "5 Participating Buildings: G (Nandadevi) • H (Nilgiri) • I (Brahmagiri) • J (Purvanchal) • K (Govardhan)",
 
     // Aarti & Countdown
     aartiTitle: "Daily Maha Aarti & Host Wings",

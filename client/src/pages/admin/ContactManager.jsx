@@ -12,17 +12,19 @@ import { useLanguage } from "../../context/LanguageContext";
 import { triggerLiveSync } from "../../utils/liveSync";
 
 const WING_OPTIONS_MR = [
-  { value: "सर्व विंग्ज (All Buildings)", label: "सर्व ४ इमारती (All Buildings)" },
+  { value: "सर्व विंग्ज (All Buildings)", label: "सर्व ५ इमारती (All Buildings)" },
   { value: "G - नंदादेवी (Nandadevi)", label: "G विंग - नंदादेवी (Nandadevi)" },
   { value: "H - निलगिरी (Nilgiri)", label: "H विंग - निलगिरी (Nilgiri)" },
+  { value: "I - ब्रह्मगिरी (Brahmagiri)", label: "I विंग - ब्रह्मगिरी (Brahmagiri)" },
   { value: "J - पूर्वांचल (Purvanchal)", label: "J विंग - पूर्वांचल (Purvanchal)" },
   { value: "K - गोवर्धन (Govardhan)", label: "K विंग - गोवर्धन (Govardhan)" }
 ];
 
 const WING_OPTIONS_EN = [
-  { value: "सर्व विंग्ज (All Buildings)", label: "All 4 Buildings (G, H, J, K)" },
+  { value: "सर्व विंग्ज (All Buildings)", label: "All 5 Buildings (G, H, I, J, K)" },
   { value: "G - नंदादेवी (Nandadevi)", label: "G Wing - Nandadevi" },
   { value: "H - निलगिरी (Nilgiri)", label: "H Wing - Nilgiri" },
+  { value: "I - ब्रह्मगिरी (Brahmagiri)", label: "I Wing - Brahmagiri" },
   { value: "J - पूर्वांचल (Purvanchal)", label: "J Wing - Purvanchal" },
   { value: "K - गोवर्धन (Govardhan)", label: "K Wing - Govardhan" }
 ];

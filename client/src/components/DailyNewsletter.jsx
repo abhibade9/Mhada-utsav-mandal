@@ -15,7 +15,11 @@ import {
   addDaysToDateStr, 
   diffInDays, 
   formatKolkataDateString, 
-  toMarathiNumeral 
+  toMarathiNumeral,
+  formatTimeToMarathi,
+  formatEventDurationToMarathi,
+  formatRitualToMarathi,
+  formatFestivalLabelToMarathi
 } from "../utils/aartiDateUtils";
 
 // Category icon and festive styling mapping
@@ -76,6 +80,56 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
       ? nl.days.filter(d => d && d.isActive !== false)
       : (config?.dailyAartiSchedule || config?.tenDaysAartiSchedule || []);
 
+    const hasExplicitDays = (nl.days && Array.isArray(nl.days) && nl.days.length > 0);
+
+    if (hasExplicitDays && rawDays.length > 0) {
+      return rawDays.map((d, idx) => {
+        const n = d.dayNumber !== undefined ? Number(d.dayNumber) : (idx + 1);
+        const dayDateStr = d.date || addDaysToDateStr(startDate, n - 1);
+        const shortDateEn = d.dateStr || d.dateStrEn || formatKolkataDateString(dayDateStr, "en", false);
+        const fullDateEn = d.dateStrEn || formatKolkataDateString(dayDateStr, "en", true);
+        const shortDateMr = d.dateStrMr || formatKolkataDateString(dayDateStr, "mr", false);
+        const fullDateMr = formatKolkataDateString(dayDateStr, "mr", true);
+        const nMr = toMarathiNumeral(n);
+
+        const isToday = Boolean(d.isCurrentDay || (activeFestivalDay !== null && activeFestivalDay === n));
+        const festivalNameEn = nl.festivalName || "Navratri Utsav";
+        const festivalNameMr = nl.festivalNameMr || "नवरात्री उत्सव";
+
+        const festivalDayLabel = d.festivalDayLabel || `Day ${n} (${festivalNameEn} - ${shortDateEn})`;
+        const festivalDayLabelMr = (d.festivalDayLabelMr && !d.festivalDayLabelMr.includes("१७ सप्टेंबर"))
+          ? d.festivalDayLabelMr
+          : formatFestivalLabelToMarathi(festivalDayLabel, festivalNameMr);
+
+        const hlEn = (d.headline && d.headline !== "Ganpati Festival Live") 
+          ? d.headline 
+          : (nl.headlineEn || (nl.headline && !(/[\u0900-\u097F]/.test(nl.headline)) ? nl.headline : null) || d.headline || "Navratri Festival Live");
+        const hlMr = (d.headlineMr && d.headlineMr !== "गणपती उत्सव थेट (लाइव्ह)") 
+          ? d.headlineMr 
+          : (nl.headlineMr || (nl.headline && /[\u0900-\u097F]/.test(nl.headline) ? nl.headline : null) || d.headlineMr || "नवरात्री उत्सव थेट (लाइव्ह)");
+
+        const subEn = d.subtitle || nl.subtitle || nl.subtitleEn || `All ${wingsCount} wings are participated`;
+        const subMr = d.subtitleMr || nl.subtitleMr || `सर्व ${wingsCount} इमारतींचा संयुक्त सहभाग`;
+
+        return {
+          ...d,
+          id: d.id || `day_${n}`,
+          dayNumber: n,
+          isCurrentDay: isToday,
+          dateStr: shortDateEn,
+          dateStrEn: fullDateEn,
+          dateStrMr: fullDateMr,
+          festivalDayLabel,
+          festivalDayLabelMr,
+          headline: hlEn,
+          headlineMr: hlMr,
+          subtitle: subEn,
+          subtitleMr: subMr,
+          blocks: (d.blocks && d.blocks.length > 0) ? d.blocks : []
+        };
+      });
+    }
+
     const daysCount = totalDays > 0 ? totalDays : (rawDays.length > 0 ? rawDays.length : 10);
     const result = [];
     const templateDay = rawDays[0] || {};
@@ -91,32 +145,47 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
       const existing = rawDays.find(d => Number(d.dayNumber) === n) 
         || (rawDays.length === 1 ? rawDays[0] : (rawDays[n - 1] || templateDay));
 
-      const isToday = (activeFestivalDay !== null && activeFestivalDay === n);
-      const festivalNameEn = nl.festivalName || "Ganesh Utsav";
-      const festivalNameMr = nl.festivalNameMr || "गणेश उत्सव";
+      const isToday = Boolean(existing?.isCurrentDay || (activeFestivalDay !== null && activeFestivalDay === n));
+      const festivalNameEn = nl.festivalName || "Navratri Utsav";
+      const festivalNameMr = nl.festivalNameMr || "नवरात्री उत्सव";
+
+      const festivalDayLabel = existing?.festivalDayLabel || `Day ${n} (${festivalNameEn} - ${shortDateEn})`;
+      const festivalDayLabelMr = (existing?.festivalDayLabelMr && !existing?.festivalDayLabelMr.includes("१७ सप्टेंबर"))
+        ? existing.festivalDayLabelMr
+        : formatFestivalLabelToMarathi(festivalDayLabel, festivalNameMr);
+
+      const hlEn = (existing?.headline && existing.headline !== "Ganpati Festival Live") 
+        ? existing.headline 
+        : (nl.headlineEn || (nl.headline && !(/[\u0900-\u097F]/.test(nl.headline)) ? nl.headline : null) || existing?.headline || "Navratri Festival Live");
+      const hlMr = (existing?.headlineMr && existing.headlineMr !== "गणपती उत्सव थेट (लाइव्ह)") 
+        ? existing.headlineMr 
+        : (nl.headlineMr || (nl.headline && /[\u0900-\u097F]/.test(nl.headline) ? nl.headline : null) || existing?.headlineMr || "नवरात्री उत्सव थेट (लाइव्ह)");
 
       result.push({
         ...existing,
-        id: existing.id || `day_${n}`,
+        id: existing?.id || `day_${n}`,
         dayNumber: n,
         isCurrentDay: isToday,
         dateStr: shortDateEn,
         dateStrEn: fullDateEn,
         dateStrMr: fullDateMr,
-        festivalDayLabel: `Day ${n} (${festivalNameEn} - ${shortDateEn})`,
-        festivalDayLabelMr: `दिवस ${nMr} (${festivalNameMr} - ${shortDateMr})`,
-        headline: existing.headline || nl.headline || "Ganpati Festival Live",
-        headlineMr: existing.headlineMr || nl.headlineMr || "गणपती उत्सव थेट (लाइव्ह)",
-        subtitle: existing.subtitle || nl.subtitle || `All ${wingsCount} wings are participated`,
-        subtitleMr: existing.subtitleMr || nl.subtitleMr || `सर्व ${wingsCount} इमारतींचा संयुक्त सहभाग`,
-        blocks: (existing.blocks && existing.blocks.length > 0) ? existing.blocks : (templateDay.blocks || [])
+        festivalDayLabel,
+        festivalDayLabelMr,
+        headline: hlEn,
+        headlineMr: hlMr,
+        subtitle: existing?.subtitle || nl.subtitle || nl.subtitleEn || `All ${wingsCount} wings are participated`,
+        subtitleMr: existing?.subtitleMr || nl.subtitleMr || `सर्व ${wingsCount} इमारतींचा संयुक्त सहभाग`,
+        blocks: (existing?.blocks && existing.blocks.length > 0) ? existing.blocks : (templateDay.blocks || [])
       });
     }
     return result;
-  }, [startDate, endDate, totalDays, activeFestivalDay, nl.days, nl.festivalName, nl.festivalNameMr, nl.headline, nl.headlineMr, nl.subtitle, nl.subtitleMr, config?.dailyAartiSchedule, wingsCount]);
+  }, [startDate, endDate, totalDays, activeFestivalDay, nl.days, nl.festivalName, nl.festivalNameMr, nl.headline, nl.headlineEn, nl.headlineMr, nl.subtitle, nl.subtitleEn, nl.subtitleMr, config?.dailyAartiSchedule, wingsCount]);
 
-  // Default selected day index: matches current active day, or 0 if upcoming / concluded
+  // Default selected day index: matches marked current day, or current active day, or 0
   const defaultIdx = useMemo(() => {
+    const currentMarkedIdx = resolvedDays.findIndex(d => d.isCurrentDay === true);
+    if (currentMarkedIdx !== -1) return currentMarkedIdx;
+
     if (activeFestivalDay !== null) {
       const foundIdx = resolvedDays.findIndex(d => d.dayNumber === activeFestivalDay);
       if (foundIdx !== -1) return foundIdx;
@@ -140,43 +209,46 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
     : (nl.bulletinTitle || "DAILY DIGITAL BULLETIN");
 
   const eventDuration = language === "mr"
-    ? (nl.eventDurationMr || nl.eventDuration || `${toMarathiNumeral(totalDays)} दिवसीय सोहळा`)
+    ? formatEventDurationToMarathi(nl.eventDuration || nl.eventDurationMr, totalDays)
     : (nl.eventDuration || `${totalDays} day event`);
 
-  // Resolve header day label based on festival status
+  // Resolve header day label based on festival status & activeDay
   let dynamicDayLabel = "";
-  if (festivalInfo.status === "upcoming") {
+  if (activeDay.isCurrentDay) {
+    dynamicDayLabel = language === "mr"
+      ? (activeDay.festivalDayLabelMr || formatFestivalLabelToMarathi(activeDay.festivalDayLabel, nl.festivalNameMr))
+      : (activeDay.festivalDayLabel || `Day ${dayNum}`);
+  } else if (festivalInfo.status === "upcoming" && activeFestivalDay === null) {
     const daysUntil = festivalInfo.daysUntil || 1;
     const startFormatted = formatKolkataDateString(startDate, language === "mr" ? "mr" : "en", false);
     dynamicDayLabel = language === "mr"
       ? `आगामी • ${startFormatted} पासून (${toMarathiNumeral(daysUntil)} दिवसांत सुरू)`
       : `Upcoming • Starts ${startFormatted} (in ${daysUntil} ${daysUntil === 1 ? "day" : "days"})`;
-  } else if (festivalInfo.status === "concluded") {
+  } else if (festivalInfo.status === "concluded" && activeFestivalDay === null) {
     dynamicDayLabel = language === "mr"
       ? "उत्सव सांगता संपन्न"
       : "Festival Concluded";
   } else {
-    // Active festival period
     dynamicDayLabel = language === "mr"
-      ? (activeDay.festivalDayLabelMr || `दिवस ${toMarathiNumeral(dayNum)}`)
+      ? (activeDay.festivalDayLabelMr || formatFestivalLabelToMarathi(activeDay.festivalDayLabel, nl.festivalNameMr))
       : (activeDay.festivalDayLabel || `Day ${dayNum}`);
   }
 
   const dayLabel = showCurrentDay
     ? dynamicDayLabel
-    : (language === "mr" ? (activeDay.festivalDayLabelMr || `दिवस ${toMarathiNumeral(dayNum)}`) : (activeDay.festivalDayLabel || `Day ${dayNum}`));
+    : (language === "mr" ? (activeDay.festivalDayLabelMr || formatFestivalLabelToMarathi(activeDay.festivalDayLabel, nl.festivalNameMr)) : (activeDay.festivalDayLabel || `Day ${dayNum}`));
 
   const headline = language === "mr"
-    ? (activeDay.headlineMr || activeDay.headline || nl.headlineMr || nl.headline || activeDay.tithi || "गणपती उत्सव थेट (लाइव्ह)")
-    : (activeDay.headline || activeDay.headlineMr || nl.headline || activeDay.tithiEn || activeDay.tithi || "Ganpati Festival Live");
+    ? (activeDay.headlineMr || nl.headlineMr || (nl.headline && /[\u0900-\u097F]/.test(nl.headline) ? nl.headline : null) || activeDay.tithi || "नवरात्री उत्सव थेट (लाइव्ह)")
+    : (activeDay.headline || nl.headlineEn || (nl.headline && !(/[\u0900-\u097F]/.test(nl.headline)) ? nl.headline : null) || activeDay.tithiEn || "Navratri Festival Live");
 
   const summary = language === "mr"
-    ? (activeDay.subtitleMr || activeDay.subtitle || nl.subtitleMr || nl.subtitle || activeDay.morningRitual || `सर्व ${wingsCount} विंग्समधील रहिवाशांचे हार्दिक स्वागत!`)
-    : (activeDay.subtitle || activeDay.subtitleMr || nl.subtitle || activeDay.morningRitualEn || activeDay.morningRitual || `All ${wingsCount} wings are participated`);
+    ? (activeDay.subtitleMr || nl.subtitleMr || activeDay.subtitle || nl.subtitle || `सर्व ${wingsCount} विंग्समधील रहिवाशांचे हार्दिक स्वागत!`)
+    : (activeDay.subtitle || nl.subtitleEn || nl.subtitle || activeDay.subtitleMr || `All ${wingsCount} wings are participated`);
 
   const safetyTip = language === "mr"
     ? (nl.safetyTipMr || nl.safetyTip || "कृपया वाहने नियुक्त पार्किंगमध्येच लावावीत. संकुल २४x७ सीसीटीव्ही निगराणीखाली आहे.")
-    : (nl.safetyTip || "Please park vehicles only in designated spots.");
+    : (nl.safetyTipEn || nl.safetyTip || "Please park vehicles only in designated spots.");
 
   const displayStyle = nl.displayStyle || "classic";
 
@@ -200,10 +272,18 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
       .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
   } else {
     // Backwards-compatible synthesis matching the screenshot
-    const morningTime = language === "mr" ? (activeDay.morningTime || "सकाळी ०८:३०") : (activeDay.morningTimeEn || activeDay.morningTime || "08:30 AM");
-    const morningRitual = language === "mr" ? (activeDay.morningRitual || "मूर्ती प्राणप्रतिष्ठा पूजा व महाआरती") : (activeDay.morningRitualEn || activeDay.morningRitual || "Murti Pranpratishtha Pooja & Maha Aarti");
-    const eveningTime = language === "mr" ? (activeDay.eveningTime || "रात्री ०७:३०") : (activeDay.eveningTimeEn || activeDay.eveningTime || "07:30 PM");
-    const eveningRitual = language === "mr" ? (activeDay.eveningRitual || "धूप आरती, सामूहिक अथर्वशीर्ष पठण व महाआरती") : (activeDay.eveningRitualEn || activeDay.eveningRitual || "Dhupaarti, Atharvashirsha & Maha Aarti");
+    const morningTime = language === "mr" 
+      ? (activeDay.morningTime ? formatTimeToMarathi(activeDay.morningTime) : (activeDay.morningTimeMr || "सकाळी ०८:३०")) 
+      : (activeDay.morningTimeEn || activeDay.morningTime || "08:30 AM");
+    const morningRitual = language === "mr" 
+      ? (activeDay.morningRitual ? formatRitualToMarathi(activeDay.morningRitual) : (activeDay.morningRitualMr || "पूजा व महाआरती")) 
+      : (activeDay.morningRitualEn || activeDay.morningRitual || "Pooja & Maha Aarti");
+    const eveningTime = language === "mr" 
+      ? (activeDay.eveningTime ? formatTimeToMarathi(activeDay.eveningTime) : (activeDay.eveningTimeMr || "रात्री ०७:३०")) 
+      : (activeDay.eveningTimeEn || activeDay.eveningTime || "07:30 PM");
+    const eveningRitual = language === "mr" 
+      ? (activeDay.eveningRitual ? formatRitualToMarathi(activeDay.eveningRitual) : (activeDay.eveningRitualMr || "धूप आरती व महाआरती")) 
+      : (activeDay.eveningRitualEn || activeDay.eveningRitual || "Dhupaarti & Maha Aarti");
     const hostWing = language === "mr" ? (activeDay.hostWing || nl.todaysHostWing || allWingsLabel) : (activeDay.hostWingEn || activeDay.hostWing || nl.todaysHostWing || allWingsLabel);
     const hostLead = language === "mr" ? (activeDay.hostLead || "सर्व कमिटी सदस्य व ज्येष्ठ नागरिक") : (activeDay.hostLeadEn || activeDay.hostLead || "All Committee Members & Senior Residents");
 
@@ -269,7 +349,9 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
           const title = (language === "mr" && blk.titleMr) ? blk.titleMr : (blk.title || meta.labelEn);
           const subtitle = (language === "mr" && blk.subtitleMr) ? blk.subtitleMr : (blk.subtitle || "");
           const desc = (language === "mr" && blk.descriptionMr) ? blk.descriptionMr : (blk.description || "");
-          const time = (language === "mr" && blk.timeMr) ? blk.timeMr : (blk.time || "");
+          const time = language === "mr"
+            ? (blk.time ? formatTimeToMarathi(blk.time) : (blk.timeMr || ""))
+            : (blk.time || blk.timeMr || "");
           const coordinator = (language === "mr" && blk.hostCoordinatorMr) ? blk.hostCoordinatorMr : (blk.hostCoordinator || "");
 
           return (
@@ -295,9 +377,19 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
                 {Array.isArray(blk.items) && blk.items.length > 0 ? (
                   <div className="space-y-1 text-gold-100/90">
                     {blk.items.map((item, itmIdx) => {
-                      const itemLabel = (language === "mr" && item.labelMr) ? item.labelMr : (item.label || "");
-                      const itemTime = (language === "mr" && item.timeMr) ? item.timeMr : (item.time || "");
-                      const itemDesc = (language === "mr" && item.descMr) ? item.descMr : (item.desc || "");
+                      const itemLabel = (language === "mr" && item.labelMr) 
+                        ? item.labelMr 
+                        : (language === "mr" 
+                            ? (item.label?.toLowerCase().includes("morning") ? "सकाळची महाआरती:" : item.label?.toLowerCase().includes("evening") ? "संध्याकाळची महाआरती:" : item.label || "")
+                            : (item.label || ""));
+                      const itemTime = language === "mr"
+                        ? (item.time ? formatTimeToMarathi(item.time) : (item.timeMr || ""))
+                        : (item.time || item.timeMr || "");
+                      const itemDesc = language === "mr"
+                        ? (item.descMr && !item.descMr.includes("श्रींची विधिवत") && !item.descMr.includes("सामूहिक अथर्वशीर्ष")
+                            ? item.descMr
+                            : (item.desc ? formatRitualToMarathi(item.desc) : (item.descMr || "")))
+                        : (item.desc || item.descMr || "");
 
                       return (
                         <div key={item.id || itmIdx} className={itmIdx > 0 ? "pt-1 border-t border-gold-500/20" : ""}>
@@ -362,7 +454,9 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
           const title = (language === "mr" && blk.titleMr) ? blk.titleMr : (blk.title || meta.labelEn);
           const subtitle = (language === "mr" && blk.subtitleMr) ? blk.subtitleMr : (blk.subtitle || "");
           const desc = (language === "mr" && blk.descriptionMr) ? blk.descriptionMr : (blk.description || "");
-          const time = (language === "mr" && blk.timeMr) ? blk.timeMr : (blk.time || "");
+          const time = language === "mr"
+            ? (blk.time ? formatTimeToMarathi(blk.time) : (blk.timeMr || ""))
+            : (blk.time || blk.timeMr || "");
 
           return (
             <div key={blk.id || idx} className="relative group">
@@ -392,15 +486,30 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
 
                 {Array.isArray(blk.items) && blk.items.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                    {blk.items.map((it, iIdx) => (
-                      <div key={iIdx} className="bg-maroon-900/60 p-2 rounded-lg border border-gold-500/20">
-                        <div className="flex items-center justify-between gap-1 text-gold-300 font-bold text-[11px]">
-                          <span>{it.label}</span>
-                          <span className="text-white font-black">{it.time}</span>
+                    {blk.items.map((it, iIdx) => {
+                      const itLabel = (language === "mr" && it.labelMr) 
+                        ? it.labelMr 
+                        : (language === "mr" 
+                            ? (it.label?.toLowerCase().includes("morning") ? "सकाळची महाआरती:" : it.label?.toLowerCase().includes("evening") ? "संध्याकाळची महाआरती:" : it.label || "")
+                            : (it.label || ""));
+                      const itTime = language === "mr"
+                        ? (it.time ? formatTimeToMarathi(it.time) : (it.timeMr || ""))
+                        : (it.time || it.timeMr || "");
+                      const itDesc = language === "mr"
+                        ? (it.descMr && !it.descMr.includes("श्रींची विधिवत") && !it.descMr.includes("सामूहिक अथर्वशीर्ष")
+                            ? it.descMr
+                            : (it.desc ? formatRitualToMarathi(it.desc) : (it.descMr || "")))
+                        : (it.desc || it.descMr || "");
+                      return (
+                        <div key={iIdx} className="bg-maroon-900/60 p-2 rounded-lg border border-gold-500/20">
+                          <div className="flex items-center justify-between gap-1 text-gold-300 font-bold text-[11px]">
+                            <span>{itLabel}</span>
+                            <span className="text-white font-black">{itTime}</span>
+                          </div>
+                          {itDesc && <p className="text-[10px] text-gold-100/70 mt-0.5 truncate">{itDesc}</p>}
                         </div>
-                        {it.desc && <p className="text-[10px] text-gold-100/70 mt-0.5 truncate">{it.desc}</p>}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : (
                   <div>
@@ -426,7 +535,9 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
           const title = (language === "mr" && blk.titleMr) ? blk.titleMr : (blk.title || meta.labelEn);
           const subtitle = (language === "mr" && blk.subtitleMr) ? blk.subtitleMr : (blk.subtitle || "");
           const desc = (language === "mr" && blk.descriptionMr) ? blk.descriptionMr : (blk.description || "");
-          const time = (language === "mr" && blk.timeMr) ? blk.timeMr : (blk.time || "");
+          const time = language === "mr"
+            ? (blk.time ? formatTimeToMarathi(blk.time) : (blk.timeMr || ""))
+            : (blk.time || blk.timeMr || "");
 
           return (
             <div 
@@ -450,12 +561,22 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
 
                 {Array.isArray(blk.items) && blk.items.length > 0 ? (
                   <div className="space-y-1">
-                    {blk.items.map((it, iIdx) => (
-                      <div key={iIdx} className="text-[11px] flex items-baseline justify-between gap-1 text-gold-100/90">
-                        <span className="font-semibold text-gold-300">{it.label}</span>
-                        <span className="font-bold text-white">{it.time}</span>
-                      </div>
-                    ))}
+                    {blk.items.map((it, iIdx) => {
+                      const itLabel = (language === "mr" && it.labelMr) 
+                        ? it.labelMr 
+                        : (language === "mr" 
+                            ? (it.label?.toLowerCase().includes("morning") ? "सकाळची महाआरती:" : it.label?.toLowerCase().includes("evening") ? "संध्याकाळची महाआरती:" : it.label || "")
+                            : (it.label || ""));
+                      const itTime = language === "mr"
+                        ? (it.time ? formatTimeToMarathi(it.time) : (it.timeMr || ""))
+                        : (it.time || it.timeMr || "");
+                      return (
+                        <div key={iIdx} className="text-[11px] flex items-baseline justify-between gap-1 text-gold-100/90">
+                          <span className="font-semibold text-gold-300">{itLabel}</span>
+                          <span className="font-bold text-white">{itTime}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div>
@@ -499,7 +620,9 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
               const IconComp = meta.icon;
               const title = (language === "mr" && blk.titleMr) ? blk.titleMr : (blk.title || meta.labelEn);
               const subtitle = (language === "mr" && blk.subtitleMr) ? blk.subtitleMr : (blk.subtitle || "");
-              const time = (language === "mr" && blk.timeMr) ? blk.timeMr : (blk.time || "");
+              const time = language === "mr"
+                ? (blk.time ? formatTimeToMarathi(blk.time) : (blk.timeMr || ""))
+                : (blk.time || blk.timeMr || "");
 
               return (
                 <div key={blk.id || idx} className="flex items-start gap-2 bg-maroon-900/50 p-2 rounded-lg border border-gold-500/20">
@@ -528,11 +651,26 @@ const DailyNewsletter = ({ onOpenUpcomingCalendar }) => {
                 <span className="font-extrabold text-gold-200 text-xs block">{title}</span>
                 {Array.isArray(blk.items) && blk.items.length > 0 ? (
                   <ul className="mt-1 space-y-0.5 text-[11px] text-gold-100/90 list-disc list-inside">
-                    {blk.items.map((it, itIdx) => (
-                      <li key={itIdx} className="truncate">
-                        <span className="font-semibold text-gold-300">{it.label}</span> {it.time && <span className="font-bold text-white">— {it.time}</span>} {it.desc && <span className="text-gold-200/70">({it.desc})</span>}
-                      </li>
-                    ))}
+                    {blk.items.map((it, itIdx) => {
+                      const itLabel = (language === "mr" && it.labelMr) 
+                        ? it.labelMr 
+                        : (language === "mr" 
+                            ? (it.label?.toLowerCase().includes("morning") ? "सकाळची महाआरती:" : it.label?.toLowerCase().includes("evening") ? "संध्याकाळची महाआरती:" : it.label || "")
+                            : (it.label || ""));
+                      const itTime = language === "mr"
+                        ? (it.time ? formatTimeToMarathi(it.time) : (it.timeMr || ""))
+                        : (it.time || it.timeMr || "");
+                      const itDesc = language === "mr"
+                        ? (it.descMr && !it.descMr.includes("श्रींची विधिवत") && !it.descMr.includes("सामूहिक अथर्वशीर्ष")
+                            ? it.descMr
+                            : (it.desc ? formatRitualToMarathi(it.desc) : (it.descMr || "")))
+                        : (it.desc || it.descMr || "");
+                      return (
+                        <li key={itIdx} className="truncate">
+                          <span className="font-semibold text-gold-300">{itLabel}</span> {itTime && <span className="font-bold text-white">— {itTime}</span>} {itDesc && <span className="text-gold-200/70">({itDesc})</span>}
+                        </li>
+                      );
+                    })}
                   </ul>
                 ) : (
                   <p className="text-[11px] text-gold-100/85 mt-0.5 leading-relaxed">{desc}</p>

@@ -123,9 +123,9 @@ const defaultInitialData = {
     ],
     sidebarSettings: {
       showFloatingTrigger: true,
-      bottomCardTitle: "All 4 Buildings",
-      bottomCardSubtitle: "Wings G, H, J, K",
-      bottomCardTagline: "❤️ ४ विंग्स, एकच परिवार",
+      bottomCardTitle: "All 5 Buildings",
+      bottomCardSubtitle: "Wings G, H, I, J, K",
+      bottomCardTagline: "❤️ ५ विंग्स, एकच परिवार",
       bottomCardSubtag: "सहकार्य • शिस्त • अखंड भक्ती"
     },
     dailyAartiSection: {
@@ -134,8 +134,8 @@ const defaultInitialData = {
       badgeEn: "Daily Maha Aarti & Host Wings",
       titleMr: "दैनिक महाआरती व विंग यजमान",
       titleEn: "Daily Maha Aarti & Host Wings",
-      subtitleMr: "दररोज सकाळी ०८:३० व रात्री ०८:०० वाजता मुख्य मंडपात महाआरती",
-      subtitleEn: "Every day at 08:30 AM and 07:30 PM near G wing",
+      subtitleMr: "",
+      subtitleEn: "",
       countdownLabelMr: "पुढील महाआरतीसाठी शिल्लक वेळ",
       countdownLabelEn: "Time Remaining Until Next Aarti",
       startDate: "2026-09-07",
@@ -152,8 +152,8 @@ const defaultInitialData = {
         dateStrEn: "Day 1 (Ganesh Chaturthi - 7 Sep)",
         tithi: "श्री गणेश चतुर्थी (मूर्ती प्राणप्रतिष्ठा)",
         tithiEn: "Ganesh Chaturthi (Pranpratishtha)",
-        hostWing: "सर्व ४ इमारती संयुक्त (G • H • J • K WINGS)",
-        hostWingEn: "All 4 Buildings Joint (G, H, J, K)",
+        hostWing: "सर्व ५ इमारती संयुक्त (G • H • I • J • K WINGS)",
+        hostWingEn: "All 5 Buildings Joint (G, H, I, J, K)",
         hostLead: "म्हाडा उत्सव मंडळ सर्व कमिटी सदस्य व ज्येष्ठ नागरिक",
         hostLeadEn: "All Committee Members & Senior Residents",
         morningTime: "सकाळी ०८:३० वाजता",
@@ -166,8 +166,8 @@ const defaultInitialData = {
         eveningRitualEn: "Dhupaarti, Atharvashirsha & Maha Aarti",
         specialPrasad: "उकडीचे मोदक (२१ मोदक महाप्रसाद)",
         specialPrasadEn: "Steamed Ukadiche Modak",
-        cultural: "दुपारी १२:०० ढोल-ताशा गजर व संध्याकाळी ६:०० लेझीम प्रात्यक्षिक",
-        culturalEn: "12:00 PM Dhol-Tasha & 6:00 PM Lezim Demonstration",
+        cultural: "घटस्थापना",
+        culturalEn: "Ghatasthapana",
         isCurrentDay: true
       }
     ],
@@ -185,7 +185,7 @@ const defaultInitialData = {
         "दुपारी १२:०० वाजता मंत्रघोषात प्राणप्रतिष्ठा व पहिली महाआरती संपन्न."
       ],
       yesterdayHighlights: ["मंडप सजावट, विद्युत रोषणाई व स्वागत कमानीचे काम पूर्ण."],
-      todaysHostWing: "सर्व ४ विंग्स संयुक्त (G, H, J, K)",
+      todaysHostWing: "सर्व ५ विंग्स संयुक्त (G, H, I, J, K)",
       hostLead: "म्हाडा उत्सव कमिटी पदाधिकारी",
       prasadSpecial: "पारंपरिक उकडीचे मोदक व पंचखाद्य",
       specialNote: "आरतीला येताना रहिवाशांनी शिस्तीचे पालन करावे."
@@ -241,12 +241,12 @@ const defaultInitialData = {
     festivalScheduleCard: {
       eventNameMr: "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य उत्सव)",
       eventNameEn: "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
-      eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
-      eventDescriptionEn: "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers.",
+      eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G, H, I, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
+      eventDescriptionEn: "10-day grand festival celebration organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers.",
       plannerMr: "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
       plannerEn: "MHADA Towers Utsav Mandal & Central Society Committee",
-      plannerDetailsMr: "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)",
-      plannerDetailsEn: "All 4 Building Wing Leads & Volunteer Squad (Wings G, H, J, K)",
+      plannerDetailsMr: "सर्व ५ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, I, J, K)",
+      plannerDetailsEn: "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)",
       imageUrl: "",
       imageCaptionMr: "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा",
       imageCaptionEn: "Festival Schedule & Complete Event Blueprint"
@@ -307,8 +307,8 @@ const defaultInitialData = {
       dayNumber: 1,
       venue: "म्हाडा टॉवर्स मुख्य प्रवेशद्वार ते मध्यवर्ती मंडप",
       venueEn: "Main Entrance to Central Pandal",
-      hostWing: "सर्व ४ विंग्ज (G, H, J, K)",
-      hostWingEn: "All 4 Wings (G, H, J, K)",
+      hostWing: "सर्व ५ विंग्ज (G, H, I, J, K)",
+      hostWingEn: "All 5 Wings (G, H, I, J, K)",
       descriptionMr: "ढोल-ताशांच्या गजरात व लेझीम पथकासह बाप्पांचे आगमन. मुख्य प्रवेशद्वारावर सुवासिनींकडून औक्षण व त्यानंतर विधिवत प्राणप्रतिष्ठा पूजा.",
       descriptionEn: "Arrival procession with traditional Dhol-Tasha and Pranpratishtha pooja at the central festive pandal.",
       isHighlight: true,
@@ -814,8 +814,20 @@ class LocalStore {
     return user;
   }
 
+  reloadFromFile() {
+    try {
+      if (fs.existsSync(DB_FILE)) {
+        const raw = fs.readFileSync(DB_FILE, "utf-8");
+        this.data = JSON.parse(raw);
+      }
+    } catch (e) {
+      console.error("[LocalStore] reloadFromFile error:", e.message);
+    }
+  }
+
   // TabConfig
   getConfig() {
+    this.reloadFromFile();
     return this.data.config;
   }
 
@@ -906,8 +918,8 @@ class LocalStore {
       _id: "ev_" + Date.now(),
       createdAt: new Date().toISOString(),
       isPublished: eventData.isPublished !== undefined ? Boolean(eventData.isPublished) : true,
-      targetAudience: eventData.targetAudience || eventData.hostWing || "सर्व विंग्ज (G, H, J, K)",
-      targetAudienceEn: eventData.targetAudienceEn || eventData.hostWingEn || "All Wings (G, H, J, K)",
+      targetAudience: eventData.targetAudience || eventData.hostWing || "सर्व विंग्ज (G, H, I, J, K)",
+      targetAudienceEn: eventData.targetAudienceEn || eventData.hostWingEn || "All Wings (G, H, I, J, K)",
       ...eventData
     };
     this.data.events.push(ev);

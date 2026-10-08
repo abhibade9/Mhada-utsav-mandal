@@ -15,9 +15,9 @@ const DEFAULT_MESSAGES = [
   },
   {
     id: "msg_2",
-    text: "All 5 Buildings (G • H • J • K • I) • MHADA Towers",
-    textMr: "सर्व ५ इमारती (G • H • J • K • I) • म्हाडा टॉवर्स",
-    textEn: "All 5 Buildings (G • H • J • K • I) • MHADA Towers",
+    text: "All 5 Buildings (G • H • I • J • K) • MHADA Towers",
+    textMr: "सर्व ५ इमारती (G • H • I • J • K) • म्हाडा टॉवर्स",
+    textEn: "All 5 Buildings (G • H • I • J • K) • MHADA Towers",
     isActive: true,
     order: 2
   },

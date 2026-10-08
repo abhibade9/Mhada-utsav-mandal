@@ -53,8 +53,8 @@ const dailyAartiSectionSchema = new mongoose.Schema({
   badgeEn: { type: String, default: "Daily Maha Aarti & Host Wings" },
   titleMr: { type: String, default: "दैनिक महाआरती व विंग यजमान" },
   titleEn: { type: String, default: "Daily Maha Aarti & Host Wings" },
-  subtitleMr: { type: String, default: "दररोज सकाळी ०८:३० व रात्री ०८:०० वाजता मुख्य मंडपात महाआरती" },
-  subtitleEn: { type: String, default: "Every day at 08:30 AM and 07:30 PM near G wing" },
+  subtitleMr: { type: String, default: "" },
+  subtitleEn: { type: String, default: "" },
   countdownLabelMr: { type: String, default: "पुढील महाआरतीसाठी शिल्लक वेळ" },
   countdownLabelEn: { type: String, default: "Time Remaining Until Next Aarti" },
   startDate: { type: String, default: "2026-09-07" },
@@ -68,12 +68,12 @@ const dailyAartiSectionSchema = new mongoose.Schema({
 const festivalScheduleCardSchema = new mongoose.Schema({
   eventNameMr: { type: String, default: "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य उत्सव)" },
   eventNameEn: { type: String, default: "Shree Ganeshotsav 2026 (10-Day Grand Celebration)" },
-  eventDescriptionMr: { type: String, default: "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा." },
-  eventDescriptionEn: { type: String, default: "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers." },
+  eventDescriptionMr: { type: String, default: "म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G, H, I, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा." },
+  eventDescriptionEn: { type: String, default: "10-day grand festival celebration organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers." },
   plannerMr: { type: String, default: "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती" },
   plannerEn: { type: String, default: "MHADA Towers Utsav Mandal & Central Society Committee" },
-  plannerDetailsMr: { type: String, default: "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)" },
-  plannerDetailsEn: { type: String, default: "All 4 Building Wing Leads & Volunteer Squad (Wings G, H, J, K)" },
+  plannerDetailsMr: { type: String, default: "सर्व ५ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, I, J, K)" },
+  plannerDetailsEn: { type: String, default: "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)" },
   imageUrl: { type: String, default: "" },
   imageCaptionMr: { type: String, default: "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा" },
   imageCaptionEn: { type: String, default: "Festival Schedule & Complete Event Blueprint" }
@@ -262,8 +262,8 @@ const mandalInfoSchema = new mongoose.Schema({
         icon: "HeartHandshake",
         titleMr: "सामाजिक एकता व सलोखा",
         titleEn: "Social Unity & Harmony",
-        descMr: "४ इमारतींमधील (G-नंदादेवी, H-निलगिरी, J-पूर्वांचल, K-गोवर्धन) सर्व मालक व भाडेकरू कुटुंबांना एका सूत्रात बांधणारा उत्सव.",
-        descEn: "Uniting all owner and tenant families across 4 buildings (G, H, J, K) under one divine family."
+        descMr: "५ इमारतींमधील (G-नंदादेवी, H-निलगिरी, I-ब्रह्मगिरी, J-पूर्वांचल, K-गोवर्धन) सर्व मालक व भाडेकरू कुटुंबांना एका सूत्रात बांधणारा उत्सव.",
+        descEn: "Uniting all owner and tenant families across 5 buildings (G, H, I, J, K) under one divine family."
       },
       {
         icon: "Leaf",
@@ -618,9 +618,9 @@ const tabConfigSchema = new mongoose.Schema({
   },
   sidebarSettings: {
     showFloatingTrigger: { type: Boolean, default: true },
-    bottomCardTitle: { type: String, default: "All 4 Buildings" },
-    bottomCardSubtitle: { type: String, default: "Wings G, H, J, K" },
-    bottomCardTagline: { type: String, default: "❤️ ४ विंग्स, एकच परिवार" },
+    bottomCardTitle: { type: String, default: "All 5 Buildings" },
+    bottomCardSubtitle: { type: String, default: "Wings G, H, I, J, K" },
+    bottomCardTagline: { type: String, default: "❤️ ५ विंग्स, एकच परिवार" },
     bottomCardSubtag: { type: String, default: "सहकार्य • शिस्त • अखंड भक्ती" }
   },
   dailyAartiSchedule: {
@@ -848,8 +848,8 @@ const tabConfigSchema = new mongoose.Schema({
         dateStrEn: "Day 10 (Concluding Maha Aarti - 16 Sep)",
         tithi: "श्री अनंत चतुर्दशी (सांगता महाआरती)",
         tithiEn: "Anant Chaturdashi (Concluding Maha Aarti)",
-        hostWing: "सर्व ४ इमारती संयुक्त (G • H • J • K WINGS)",
-        hostWingEn: "All 4 Buildings Joint (G, H, J, K)",
+        hostWing: "सर्व ५ इमारती संयुक्त (G • H • I • J • K WINGS)",
+        hostWingEn: "All 5 Buildings Joint (G, H, I, J, K)",
         hostLead: "समस्त म्हाडा टॉवर्स सोसायटी परिवार",
         hostLeadEn: "All MHADA Towers Society Residents",
         morningTime: "सकाळी ०८:३० वाजता",

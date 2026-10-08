@@ -24,9 +24,9 @@ const DEFAULT_CONFIG = {
     },
     {
       id: "msg_2",
-      text: "All 5 Buildings (G • H • J • K • I) • MHADA Towers",
-      textMr: "सर्व ५ इमारती (G • H • J • K • I) • म्हाडा टॉवर्स",
-      textEn: "All 5 Buildings (G • H • J • K • I) • MHADA Towers",
+      text: "All 5 Buildings (G • H • I • J • K) • MHADA Towers",
+      textMr: "सर्व ५ इमारती (G • H • I • J • K) • म्हाडा टॉवर्स",
+      textEn: "All 5 Buildings (G • H • I • J • K) • MHADA Towers",
       isActive: true,
       order: 2
     },
@@ -73,9 +73,9 @@ const DEFAULT_CONFIG = {
   sidebarMenu: [],
   sidebarSettings: {
     showFloatingTrigger: true,
-    bottomCardTitle: "All 4 Buildings",
-    bottomCardSubtitle: "Wings G, H, J, K",
-    bottomCardTagline: "❤️ ४ विंग्स, एकच परिवार",
+    bottomCardTitle: "All 5 Buildings",
+    bottomCardSubtitle: "Wings G, H, I, J, K",
+    bottomCardTagline: "❤️ ५ विंग्स, एकच परिवार",
     bottomCardSubtag: "सहकार्य • शिस्त • अखंड भक्ती"
   },
   dailyAartiSection: {
@@ -114,12 +114,12 @@ const DEFAULT_CONFIG = {
   festivalScheduleCard: {
     eventNameMr: "श्री गणेशोत्सव २०२६ (१० दिवसीय भव्य उत्सव)",
     eventNameEn: "Shree Ganeshotsav 2026 (10-Day Grand Celebration)",
-    eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ४ विंग्ज (G, H, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
-    eventDescriptionEn: "10-day grand festival celebration organized jointly by all 4 buildings (Wings G, H, J, K) of MHADA Towers.",
+    eventDescriptionMr: "म्हाडा टॉवर्स संकुलातील सर्व ५ विंग्ज (G, H, I, J, K) संयुक्त विद्यमाने आयोजित १० दिवसीय अखंड गणेशोत्सव सोहळा.",
+    eventDescriptionEn: "10-day grand festival celebration organized jointly by all 5 buildings (Wings G, H, I, J, K) of MHADA Towers.",
     plannerMr: "म्हाडा टॉवर्स उत्सव मंडळ व मध्यवर्ती सोसायटी समिती",
     plannerEn: "MHADA Towers Utsav Mandal & Central Society Committee",
-    plannerDetailsMr: "सर्व ४ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, J, K)",
-    plannerDetailsEn: "All 4 Building Wing Leads & Volunteer Squad (Wings G, H, J, K)",
+    plannerDetailsMr: "सर्व ५ इमारतींचे विंग प्रमुख व स्वयंसेवक दल (विंग G, H, I, J, K)",
+    plannerDetailsEn: "All 5 Building Wing Leads & Volunteer Squad (Wings G, H, I, J, K)",
     imageUrl: "",
     imageCaptionMr: "उत्सव वेळापत्रक व संपूर्ण कार्यक्रम रूपरेषा",
     imageCaptionEn: "Festival Schedule & Complete Event Blueprint"
@@ -173,9 +173,12 @@ const DEFAULT_CONFIG = {
   }
 };
 
-const sanitizeField = (val, fallback) => {
-  if (typeof val === "string" && (val.includes("??") || val.includes("\ufffd"))) {
-    return fallback;
+const sanitizeField = (val, fallback, allowEmpty = false) => {
+  if (val === undefined || val === null) return fallback;
+  if (typeof val === "string") {
+    if (val.includes("??") || val.includes("\ufffd")) return fallback;
+    if (!allowEmpty && !val.trim()) return fallback;
+    return val;
   }
   return val || fallback;
 };
@@ -185,11 +188,17 @@ const cleanFestivalScheduleCard = (card) => {
   return {
     ...DEFAULT_CONFIG.festivalScheduleCard,
     ...card,
-    eventNameMr: sanitizeField(card.eventNameMr, DEFAULT_CONFIG.festivalScheduleCard.eventNameMr),
-    eventDescriptionMr: sanitizeField(card.eventDescriptionMr, DEFAULT_CONFIG.festivalScheduleCard.eventDescriptionMr),
-    plannerMr: sanitizeField(card.plannerMr, DEFAULT_CONFIG.festivalScheduleCard.plannerMr),
-    plannerDetailsMr: sanitizeField(card.plannerDetailsMr, DEFAULT_CONFIG.festivalScheduleCard.plannerDetailsMr),
-    imageCaptionMr: sanitizeField(card.imageCaptionMr, DEFAULT_CONFIG.festivalScheduleCard.imageCaptionMr)
+    eventNameMr: sanitizeField(card.eventNameMr, DEFAULT_CONFIG.festivalScheduleCard.eventNameMr, false),
+    eventNameEn: sanitizeField(card.eventNameEn, DEFAULT_CONFIG.festivalScheduleCard.eventNameEn, false),
+    eventDescriptionMr: sanitizeField(card.eventDescriptionMr, DEFAULT_CONFIG.festivalScheduleCard.eventDescriptionMr, true),
+    eventDescriptionEn: sanitizeField(card.eventDescriptionEn, DEFAULT_CONFIG.festivalScheduleCard.eventDescriptionEn, true),
+    plannerMr: sanitizeField(card.plannerMr, DEFAULT_CONFIG.festivalScheduleCard.plannerMr, false),
+    plannerEn: sanitizeField(card.plannerEn, DEFAULT_CONFIG.festivalScheduleCard.plannerEn, false),
+    plannerDetailsMr: sanitizeField(card.plannerDetailsMr, DEFAULT_CONFIG.festivalScheduleCard.plannerDetailsMr, true),
+    plannerDetailsEn: sanitizeField(card.plannerDetailsEn, DEFAULT_CONFIG.festivalScheduleCard.plannerDetailsEn, true),
+    imageUrl: card.imageUrl !== undefined ? card.imageUrl : (DEFAULT_CONFIG.festivalScheduleCard.imageUrl || ""),
+    imageCaptionMr: sanitizeField(card.imageCaptionMr, DEFAULT_CONFIG.festivalScheduleCard.imageCaptionMr, true),
+    imageCaptionEn: sanitizeField(card.imageCaptionEn, DEFAULT_CONFIG.festivalScheduleCard.imageCaptionEn, true)
   };
 };
 
@@ -462,7 +471,7 @@ export const ConfigProvider = ({ children }) => {
           ...config, 
           dailyAartiSchedule: res.data.dailyAartiSchedule,
           ...(res.data.dailyAartiSection ? { dailyAartiSection: res.data.dailyAartiSection } : {}),
-          ...(res.data.festivalScheduleCard ? { festivalScheduleCard: res.data.festivalScheduleCard } : {}),
+          ...(res.data.festivalScheduleCard ? { festivalScheduleCard: cleanFestivalScheduleCard(res.data.festivalScheduleCard) } : {}),
           ...(res.data.tabs ? { tabs: res.data.tabs } : {})
         };
         saveLocal(updated);
@@ -474,6 +483,7 @@ export const ConfigProvider = ({ children }) => {
         ...config, 
         dailyAartiSchedule,
         ...(extraConfig.dailyAartiSection ? { dailyAartiSection: extraConfig.dailyAartiSection } : {}),
+        ...(extraConfig.festivalScheduleCard ? { festivalScheduleCard: cleanFestivalScheduleCard(extraConfig.festivalScheduleCard) } : {}),
         ...(extraConfig.aartiTabEnabled !== undefined && config?.tabs?.aarti ? {
           tabs: {
             ...config.tabs,
@@ -508,22 +518,22 @@ export const ConfigProvider = ({ children }) => {
       if (res.data.success) {
         const updated = {
           ...config,
-          festivalScheduleCard: res.data.festivalScheduleCard || festivalScheduleCard
+          festivalScheduleCard: cleanFestivalScheduleCard(res.data.festivalScheduleCard || festivalScheduleCard)
         };
         saveLocal(updated);
-        return { success: true };
+        return { success: true, festivalScheduleCard: updated.festivalScheduleCard };
       }
       return { success: false, message: res.data.message };
     } catch (err) {
       const updated = {
         ...config,
-        festivalScheduleCard: {
+        festivalScheduleCard: cleanFestivalScheduleCard({
           ...(config.festivalScheduleCard || {}),
           ...festivalScheduleCard
-        }
+        })
       };
       saveLocal(updated);
-      return { success: true, message: "स्थानिकरित्या जतन झाले" };
+      return { success: true, message: "स्थानिकरित्या जतन झाले", festivalScheduleCard: updated.festivalScheduleCard };
     }
   };
 

@@ -127,7 +127,6 @@ const AdminLoginModal = ({ isOpen, onClose, onSuccess }) => {
                       type="text"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="mhadatowersutsavmandal@gmail.com"
                       required
                       autoComplete="username"
                       className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-xl border border-gray-300 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none"
@@ -227,7 +226,6 @@ const AdminLoginModal = ({ isOpen, onClose, onSuccess }) => {
                         type="email"
                         value={forgotEmail}
                         onChange={(e) => setForgotEmail(e.target.value)}
-                        placeholder="mhadatowersutsavmandal@gmail.com"
                         required
                         className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-xl border border-gray-300 focus:border-gold-500 focus:ring-1 focus:ring-gold-500 outline-none"
                       />

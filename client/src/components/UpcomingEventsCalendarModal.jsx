@@ -152,8 +152,8 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
     hostLeadEn: d.hostLeadEn || d.hostLead || "",
     ritual: d.ritual || d.morningRitual || "",
     ritualEn: d.ritualEn || d.morningRitualEn || "",
-    cultural: d.cultural || d.eveningRitual || "",
-    culturalEn: d.culturalEn || d.eveningRitualEn || ""
+    cultural: d.cultural || "",
+    culturalEn: d.culturalEn || ""
   }));
 
   const festivalEvents = allEvents
@@ -213,8 +213,8 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
       dayNumber: 1,
       venue: "मुख्य मंडप, म्हाडा टॉवर्स",
       venueEn: "Main Pandal, MHADA Towers",
-      hostWing: "सर्व विंग्ज (G, H, J, K)",
-      hostWingEn: "All Wings (G, H, J, K)",
+      hostWing: "सर्व विंग्ज (G, H, I, J, K)",
+      hostWingEn: "All Wings (G, H, I, J, K)",
       descriptionMr: "",
       descriptionEn: "",
       imageUrl: "",
@@ -239,8 +239,8 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
       dayNumber: ev.dayNumber || 1,
       venue: ev.venue || ev.venueMr || "मुख्य मंडप, म्हाडा टॉवर्स",
       venueEn: ev.venueEn || "Main Pandal, MHADA Towers",
-      hostWing: ev.hostWing || "सर्व विंग्ज (G, H, J, K)",
-      hostWingEn: ev.hostWingEn || "All Wings (G, H, J, K)",
+      hostWing: ev.hostWing || "सर्व विंग्ज (G, H, I, J, K)",
+      hostWingEn: ev.hostWingEn || "All Wings (G, H, I, J, K)",
       descriptionMr: ev.descriptionMr || ev.descMr || "",
       descriptionEn: ev.descriptionEn || ev.descEn || "",
       imageUrl: ev.imageUrl || "",
@@ -443,10 +443,10 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
   const filtered10Days = normalized10Days.filter((item) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.trim().toLowerCase();
-    const tithi = (language === "mr" ? item.tithi : item.tithiEn).toLowerCase();
-    const wing = (language === "mr" ? item.hostWing : item.hostWingEn).toLowerCase();
-    const ritual = (language === "mr" ? item.ritual : item.ritualEn).toLowerCase();
-    const cult = (language === "mr" ? item.cultural : item.culturalEn).toLowerCase();
+    const tithi = ((language === "mr" ? item.tithi : item.tithiEn) || "").toLowerCase();
+    const wing = ((language === "mr" ? item.hostWing : item.hostWingEn) || "").toLowerCase();
+    const ritual = ((language === "mr" ? item.ritual : item.ritualEn) || "").toLowerCase();
+    const cult = ((language === "mr" ? item.cultural : item.culturalEn) || "").toLowerCase();
     const lead = (item.hostLead || "").toLowerCase();
     return tithi.includes(q) || wing.includes(q) || ritual.includes(q) || cult.includes(q) || lead.includes(q);
   });
@@ -506,7 +506,7 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
                   </span>
                 </span>
                 <span className="hidden sm:inline-block text-[10px] font-bold text-gold-300/80 bg-maroon-800/80 px-2 py-0.5 rounded-md border border-gold-500/30">
-                  {language === "mr" ? "सहभागी ४ इमारती (G • H • J • K)" : "4 Buildings: G, H, J, K"}
+                  {language === "mr" ? "सहभागी ५ इमारती (G • H • I • J • K)" : "5 Buildings: G, H, I, J, K"}
                 </span>
               </div>
 
@@ -716,7 +716,7 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
           {activeTab === "10days" && (
             <div className="flex items-center gap-1 text-[11px] font-bold text-maroon-900">
               <Building className="w-3.5 h-3.5 text-maroon-800" />
-              <span>G (नंदादेवी) • H (निलगिरी) • J (पूर्वांचल) • K (गोवर्धन)</span>
+              <span>G (नंदादेवी) • H (निलगिरी) • I (ब्रह्मगिरी) • J (पूर्वांचल) • K (गोवर्धन)</span>
             </div>
           )}
         </div>
@@ -855,9 +855,13 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
 
                           {/* Cultural Program */}
                           <td className="py-3 px-4 align-top">
-                            <p className="text-[11px] text-indigo-950 bg-indigo-50/60 p-2 rounded-xl border border-indigo-200/80 leading-relaxed font-medium">
-                              {language === "mr" ? item.cultural : item.culturalEn}
-                            </p>
+                            {(language === "mr" ? item.cultural : item.culturalEn) ? (
+                              <p className="text-[11px] text-indigo-950 bg-indigo-50/60 p-2 rounded-xl border border-indigo-200/80 leading-relaxed font-medium whitespace-pre-line">
+                                {language === "mr" ? item.cultural : item.culturalEn}
+                              </p>
+                            ) : (
+                              <span className="text-gray-400 text-xs italic">-</span>
+                            )}
                           </td>
                         </tr>
                       ))}
@@ -904,10 +908,12 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
                         <p className="text-gray-800 text-[11px] mt-0.5">{language === "mr" ? item.ritual : item.ritualEn}</p>
                       </div>
 
-                      <div className="p-2 bg-indigo-50/80 rounded-xl border border-indigo-200">
-                        <span className="text-[10px] font-bold text-indigo-900 uppercase block">सांस्कृतिक कार्यक्रम:</span>
-                        <p className="text-gray-800 text-[11px] mt-0.5">{language === "mr" ? item.cultural : item.culturalEn}</p>
-                      </div>
+                      {(language === "mr" ? item.cultural : item.culturalEn) ? (
+                        <div className="p-2 bg-indigo-50/80 rounded-xl border border-indigo-200">
+                          <span className="text-[10px] font-bold text-indigo-900 uppercase block">सांस्कृतिक कार्यक्रम:</span>
+                          <p className="text-gray-800 text-[11px] mt-0.5 whitespace-pre-line">{language === "mr" ? item.cultural : item.culturalEn}</p>
+                        </div>
+                      ) : null}
                     </div>
 
                     <div className="flex items-center justify-between pt-1 border-t border-gold-100">
@@ -1186,8 +1192,8 @@ export const UpcomingEventsCalendarModal = ({ isOpen, onClose, defaultTab = "fes
             <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
             <span>
               {language === "mr"
-                ? "सर्व कार्यक्रमांमध्ये सर्व ४ इमारतींच्या (G, H, J, K) रहिवाशांचा सहभाग अनिवार्य व आग्रहाचा आहे."
-                : "Residents of all 4 buildings (G, H, J, K) are cordially invited."}
+                ? "सर्व कार्यक्रमांमध्ये सर्व ५ इमारतींच्या (G, H, I, J, K) रहिवाशांचा सहभाग अनिवार्य व आग्रहाचा आहे."
+                : "Residents of all 5 buildings (G, H, I, J, K) are cordially invited."}
             </span>
           </div>
 
